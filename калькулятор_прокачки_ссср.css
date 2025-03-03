@@ -1,0 +1,284 @@
+@keyframes animate-border-fade
+{
+   0% { box-shadow: inset 0 0 0 0px #e1e1e1, 0 0 1px transparent;  }
+   100% { box-shadow: inset 0 0 0 4px #FF0000, 0 0 1px transparent;  }
+}
+@keyframes transform-pulse
+{
+   0% { transform: rotate(0deg) ;  }
+   50% { transform: rotate(0deg) scale(1.1,1.1) ;  }
+   100% { transform: rotate(0deg) scale(1.0,1.0) ;  }
+}
+@keyframes transform-shake
+{
+   0% { transform: translate(-2px,0px) rotate(0deg) ;  }
+   33% { transform: translate(2px,0px) rotate(0deg) ;  }
+   66% { transform: translate(-2px,0px) rotate(0deg) ;  }
+   100% { transform: translate(2px,0px) rotate(0deg) ;  }
+}
+@keyframes whitetogrey
+{
+   0% { background-color: #FFFFFF;  }
+   100% { background-color: rgba(255,0,0,0.30);  }
+}
+@keyframes greytowhite
+{
+   0% { background-color: rgba(255,0,0,0.30);  }
+   100% { background-color: #FFFFFF;  }
+}
+@keyframes red-white-red
+{
+   0% { background-color: rgba(255,0,0,0.31);  }
+   50% { background-color: #FFFFFF;  }
+   100% { background-color: rgba(255,0,0,0.31);  }
+}
+@keyframes red-white
+{
+   0% { background-color: rgba(255,0,0,0.30);  }
+   100% { background-color: #FFFFFF;  }
+}
+@keyframes border-b-r-b
+{
+   0% { border-color: #000000;  }
+   50% { border-color: #FF0000;  }
+   100% { border-color: #000000;  }
+}
+@keyframes w-r
+{
+   0% { background-color: #FFFFFF;  }
+   100% { background-color: rgba(255,0,0,0.39);  }
+}
+h1, .h1
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 32px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h2, .h2
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 27px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h3, .h3
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 24px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h4, .h4
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 21px;
+   font-style: italic;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h5, .h5
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 19px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h6, .h6
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+.pt
+{
+   font-family: "Courier New";
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #2E74B5;
+   --color: #2E74B5;
+   background-color: rgba(0,0,255,0.49);
+   --background-color: rgba(0,0,255,0.49);
+}
+.lvl
+{
+   text-decoration: none;
+   background-color: rgba(220,220,220,0.39);
+   --background-color: rgba(220,220,220,0.39);
+}
+.arta
+{
+   text-decoration: none;
+   background-color: rgba(160,82,45,0.49);
+   --background-color: rgba(160,82,45,0.49);
+}
+.flags
+{
+   text-decoration: none;
+   background-color: rgba(192,192,192,0.59);
+   --background-color: rgba(192,192,192,0.59);
+}
+.tt
+{
+   text-decoration: none;
+   background-color: rgba(105,105,105,0.49);
+   --background-color: rgba(105,105,105,0.49);
+}
+.st
+{
+   text-decoration: none;
+   background-color: rgba(255,215,0,0.49);
+   --background-color: rgba(255,215,0,0.49);
+}
+.lt
+{
+   text-decoration: none;
+   background-color: rgba(0,128,0,0.49);
+   --background-color: rgba(0,128,0,0.49);
+}
+.w-t-g
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: whitetogrey;
+   animation-duration: 100ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.g-t-w
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: greytowhite;
+   animation-duration: 100ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.r-w-r
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: red-white-red;
+   animation-duration: 2500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.r-w
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: red-white;
+   animation-duration: 2000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.border_b-r-b
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: border-b-r-b;
+   animation-duration: 1000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
+}
+.border_fade
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: animate-border-fade;
+   animation-duration: 2000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+   animation-fill-mode: forwards;
+}
+.shake
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: transform-shake;
+   animation-duration: 2500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+   animation-fill-mode: forwards;
+}
+.pulse
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: transform-pulse;
+   animation-duration: 1000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
+}
+.white-red
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: w-r;
+   animation-duration: 100ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
