@@ -12,7 +12,7 @@ body
 #Table1
 {
    border-radius: 0px;
-   border: 0px solid transparent;
+   border: 1px solid transparent;
    background-color: rgba(248,249,250,0.00);
    background-image: none;
    border-collapse: collapse;
@@ -72,13 +72,14 @@ body
 }
 #Table1 .cell4
 {
-   background-color: transparent;
-   background-image: none;
-   border: 0px #C0C0C0 solid;
-   text-align: left;
-   vertical-align: top;
-   width: 96px;
-   height: 18px;
+   text-align: center;
+   vertical-align: middle;
+   width: 95px;
+   height: 30px;
+   color: #000000;
+   font-family: Arial;
+   font-size: 16px;
+   line-height: 18px;
 }
 #Table1 .cell5
 {
@@ -87,7 +88,7 @@ body
    border: 0px #C0C0C0 solid;
    text-align: left;
    vertical-align: top;
-   width: 16px;
+   width: 96px;
    height: 18px;
 }
 #Table1 .cell6
@@ -97,8 +98,8 @@ body
    border: 0px #C0C0C0 solid;
    text-align: left;
    vertical-align: top;
-   width: 96px;
-   height: 30px;
+   width: 16px;
+   height: 18px;
 }
 #Table1 .cell7
 {
@@ -107,27 +108,28 @@ body
    border: 0px #C0C0C0 solid;
    text-align: left;
    vertical-align: top;
-   width: 16px;
-   height: 30px;
+   width: 95px;
+   height: 18px;
 }
 #Table1 .cell8
 {
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
    text-align: left;
    vertical-align: top;
    width: 96px;
    height: 30px;
-   font-size: 0;
 }
 #Table1 .cell9
 {
    background-color: transparent;
    background-image: none;
    border: 0px #C0C0C0 solid;
-   text-align: center;
-   vertical-align: middle;
-   width: 96px;
-   height: 18px;
-   font-size: 0;
+   text-align: left;
+   vertical-align: top;
+   width: 16px;
+   height: 30px;
 }
 #Table1 .cell10
 {
@@ -142,6 +144,35 @@ body
 }
 #Table1 .cell11
 {
+   text-align: left;
+   vertical-align: top;
+   width: 96px;
+   height: 30px;
+   font-size: 0;
+}
+#Table1 .cell12
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
+   text-align: left;
+   vertical-align: top;
+   width: 95px;
+   height: 30px;
+}
+#Table1 .cell13
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 96px;
+   height: 18px;
+   font-size: 0;
+}
+#Table1 .cell14
+{
    background-color: transparent;
    background-image: none;
    border: 0px #C0C0C0 solid;
@@ -150,7 +181,7 @@ body
    width: 16px;
    height: 30px;
 }
-#Table1 .cell12
+#Table1 .cell15
 {
    background-color: transparent;
    background-image: none;
@@ -161,11 +192,19 @@ body
    height: 18px;
    font-size: 0;
 }
-#Table1 .cell13
+#Table1 .cell16
 {
    text-align: center;
    vertical-align: middle;
    width: 96px;
+   height: 30px;
+   font-size: 0;
+}
+#Table1 .cell17
+{
+   text-align: center;
+   vertical-align: middle;
+   width: 95px;
    height: 30px;
    font-size: 0;
 }
@@ -183,10 +222,6 @@ body
 {
    padding: 0;
 }
-#Table2 td div
-{
-   white-space: nowrap;
-}
 #Table2 p, #Table2 ul
 {
    margin: 0;
@@ -194,15 +229,126 @@ body
 }
 #Table2 .cell0
 {
-   background-color: rgba(220,220,220,0.39);
+   background-color: transparent;
    background-image: none;
    border: 1px #C0C0C0 solid;
    text-align: center;
    vertical-align: middle;
    width: 102px;
-   height: 30px;
+   height: 40px;
+   font-size: 0;
 }
 #Table2 .cell1
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell2
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell3
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell4
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell5
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell6
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell7
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell8
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell9
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell10
+{
+   background-color: transparent;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+   text-align: center;
+   vertical-align: middle;
+   width: 102px;
+   height: 40px;
+   font-size: 0;
+}
+#Table2 .cell11
 {
    background-color: rgba(220,220,220,0.39);
    background-image: none;
@@ -210,11 +356,7 @@ body
    text-align: center;
    vertical-align: middle;
    width: 102px;
-   height: 30px;
-   color: #000000;
-   font-family: Warhelios;
-   font-size: 13px;
-   line-height: 17px;
+   height: 40px;
 }
 #wb_Image12
 {
@@ -1375,63 +1517,6 @@ body
    margin-right: auto;
    vertical-align: top;
 }
-#wb_Image4
-{
-   margin: 0;
-   vertical-align: top;
-}
-#Image4
-{
-   border: 0px solid #000000;
-   border-radius: 0px;
-   box-sizing: border-box;
-   padding: 0;
-   display: block;
-   width: 100%;
-   height: auto;
-   max-width: 96px;
-   margin-left: auto;
-   margin-right: auto;
-   vertical-align: top;
-}
-#wb_Image11
-{
-   margin: 0;
-   vertical-align: top;
-}
-#Image11
-{
-   border: 0px solid #000000;
-   border-radius: 0px;
-   box-sizing: border-box;
-   padding: 0;
-   display: block;
-   width: 100%;
-   height: auto;
-   max-width: 96px;
-   margin-left: auto;
-   margin-right: auto;
-   vertical-align: top;
-}
-#wb_Image52
-{
-   margin: 0;
-   vertical-align: top;
-}
-#Image52
-{
-   border: 0px solid #000000;
-   border-radius: 0px;
-   box-sizing: border-box;
-   padding: 0;
-   display: block;
-   width: 100%;
-   height: auto;
-   max-width: 96px;
-   margin-left: auto;
-   margin-right: auto;
-   vertical-align: top;
-}
 #wb_стрелка_1
 {
    margin: 0;
@@ -2021,12 +2106,12 @@ body
    margin-right: auto;
    vertical-align: top;
 }
-#wb_Image14
+#wb_261
 {
    margin: 0;
    vertical-align: top;
 }
-#Image14
+#261
 {
    border: 0px solid #000000;
    border-radius: 0px;
@@ -2040,12 +2125,12 @@ body
    margin-right: auto;
    vertical-align: top;
 }
-#wb_Image1
+#wb_212а
 {
    margin: 0;
    vertical-align: top;
 }
-#Image1
+#212а
 {
    border: 0px solid #000000;
    border-radius: 0px;
@@ -2059,12 +2144,12 @@ body
    margin-right: auto;
    vertical-align: top;
 }
-#wb_Image2
+#wb_су-14-2
 {
    margin: 0;
    vertical-align: top;
 }
-#Image2
+#су-14-2
 {
    border: 0px solid #000000;
    border-radius: 0px;
@@ -2077,18 +2162,292 @@ body
    margin-left: auto;
    margin-right: auto;
    vertical-align: top;
+}
+#wb_с-51
+{
+   margin: 0;
+   vertical-align: top;
+}
+#с-51
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 96px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_су-8
+{
+   margin: 0;
+   vertical-align: top;
+}
+#су-8
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 96px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_су-122а
+{
+   margin: 0;
+   vertical-align: top;
+}
+#су-122а
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 96px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_стрелка_11
+{
+   margin: 0;
+   vertical-align: top;
+}
+#стрелка_11
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 14px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_стрелка_12
+{
+   margin: 0;
+   vertical-align: top;
+}
+#стрелка_12
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 14px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_стрелка_13
+{
+   margin: 0;
+   vertical-align: top;
+}
+#стрелка_13
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 14px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_стрелка_14
+{
+   margin: 0;
+   vertical-align: top;
+}
+#стрелка_14
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 14px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_стрелка_15
+{
+   margin: 0;
+   vertical-align: top;
+}
+#стрелка_15
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 14px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_стрелка_16
+{
+   margin: 0;
+   vertical-align: top;
+}
+#стрелка_16
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 14px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_FlipSwitch1
+{
+   margin: 0;
+}
+#FlipSwitch1
+{
+   display: none;
+}
+#FlipSwitch1-label
+{
+   display: block;
+   overflow: hidden;
+   cursor: pointer;
+   border: 2px solid #000000;
+   border-radius: 16px;
+   box-sizing: border-box;
+   max-width: 100%;
+   height: 100%;
+   transition: border-color 300ms ease-in 0s;
+}
+#FlipSwitch1-inner
+{
+   box-sizing: border-box;
+   display: block;
+   width: 200%;
+   margin-left: -100%;
+   transition: margin 300ms ease-in 0s;
+}
+#FlipSwitch1-inner:before, #FlipSwitch1-inner:after
+{
+   display: block;
+   float: left;
+   width: 50%;
+   height: 16px;
+   padding: 0;
+   line-height: 16px;
+   color: #212529;
+   font-family: Warhelios;
+   font-weight: normal;
+   font-style: normal;
+   font-size: 9.3px;
+   box-sizing: border-box;
+   border-radius: 16px;
+   text-align: center;
+}
+#FlipSwitch1-inner:before
+{
+   content: "max";
+   padding-right: 16px;
+   background-color: #000000;
+   color: #FFFFFF;
+   border-radius: 16px 0 0 16px;
+}
+#FlipSwitch1-inner:after
+{
+   content: "min";
+   padding-left: 16px;
+   background-color: #FFFFFF;
+   color: #212529;
+   border-radius: 0 16px 16px 0;
+}
+#FlipSwitch1-switch
+{
+   display: block;
+   width: 16px;
+   margin: 0;
+   background: #000000;
+   border: 2px solid #000000;
+   border-radius: 16px;
+   box-shadow: 5px 0px 5px rgba(0,0,0,0.30);
+   position: absolute;
+   top: 2px;
+   bottom: 2px;
+   right: 22px;
+   transition: all 300ms ease-in 0s;
+   box-sizing: border-box;
+}
+#FlipSwitch1:checked + #FlipSwitch1-label
+{
+   border-color: #000000;
+}
+#FlipSwitch1:checked + #FlipSwitch1-label #FlipSwitch1-inner
+{
+   margin-left: 0;
+}
+#FlipSwitch1:checked + #FlipSwitch1-label #FlipSwitch1-switch
+{
+   right: 2px;
+   background: #000000;
+   border-color: #000000;
 }
 #Layer1
+{
+   background-color: #F8F9FA;
+   background-image: none;
+   border-radius: 0px;
+}
+#Layer2
+{
+   background-color: #F8F9FA;
+   background-image: none;
+   border-radius: 0px;
+}
+#Layer3
 {
    background-color: transparent;
    background-image: none;
    border-radius: 0px;
 }
-#wb_Image3
+#wb_окно_261_4_мин
 {
    vertical-align: top;
 }
-#Image3
+#окно_261_4_мин
 {
    border: 0px solid #000000;
    border-radius: 0px;
@@ -2099,11 +2458,254 @@ body
    width: 100%;
    height: 100%;
 }
-#wb_палка_для_стрелки
+#wb_великобритания
+{
+   margin: 0;
+   vertical-align: top;
+}
+#великобритания
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_чехословакия
+{
+   margin: 0;
+   vertical-align: top;
+}
+#чехословакия
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_ссср
+{
+   margin: 0;
+   vertical-align: top;
+}
+#ссср
+{
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_германия
+{
+   margin: 0;
+   vertical-align: top;
+}
+#германия
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_сша
+{
+   margin: 0;
+   vertical-align: top;
+}
+#сша
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_франция
+{
+   margin: 0;
+   vertical-align: top;
+}
+#франция
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_китай
+{
+   margin: 0;
+   vertical-align: top;
+}
+#китай
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_япония
+{
+   margin: 0;
+   vertical-align: top;
+}
+#япония
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_польша
+{
+   margin: 0;
+   vertical-align: top;
+}
+#польша
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_швеция
+{
+   margin: 0;
+   vertical-align: top;
+}
+#швеция
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#wb_италия
+{
+   margin: 0;
+   vertical-align: top;
+}
+#италия
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   box-sizing: border-box;
+   padding: 0;
+   display: block;
+   width: 100%;
+   height: auto;
+   max-width: 102px;
+   margin-left: auto;
+   margin-right: auto;
+   vertical-align: top;
+}
+#Layer4
+{
+   background-color: transparent;
+   background-image: none;
+   border-radius: 0px;
+}
+#wb_окно_715г_мин
 {
    vertical-align: top;
 }
-#палка_для_стрелки
+#окно_715г_мин
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_стрелка_к_штурм-сау
+{
+   vertical-align: top;
+}
+#стрелка_к_штурм-сау
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_стрелка_мс1
+{
+   vertical-align: top;
+}
+#стрелка_мс1
 {
    border: 0px solid #000000;
    border-radius: 0px;

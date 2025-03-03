@@ -282,3 +282,9 @@ h6, .h6
    animation-direction: normal;
    animation-fill-mode: forwards;
 }
+.red
+{
+   text-decoration: none;
+   background-color: rgba(255,0,0,0.59);
+   --background-color: rgba(255,0,0,0.59);
+}
