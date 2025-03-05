@@ -10,6 +10,16 @@
    0% { transform: translate(-3px,0px) rotate(0deg) ;  }
    100% { transform: translate(-3px,0px) rotate(0deg) ;  }
 }
+@keyframes red_probe
+{
+   0% { background-color: rgba(255,255,255,0.00);  }
+   100% { background-color: rgba(255,0,0,0.39);  }
+}
+@keyframes red_probe-2
+{
+   0% { background-color: rgba(255,0,0,0.39);  }
+   100% { background-color: rgba(255,255,255,0.00);  }
+}
 h1, .h1
 {
    font-family: Arial;
@@ -159,19 +169,6 @@ h6, .h6
    background-color: #D3D3D3;
    --background-color: rgba(211,211,211,1.00);
 }
-.shacker_pause
-{
-   text-decoration: none;
-   background-color: transparent;
-   animation-name: shacker;
-   animation-duration: 1ms;
-   animation-delay: 0ms;
-   animation-timing-function: linear;
-   animation-iteration-count: 1;
-   animation-direction: alternate;
-   animation-fill-mode: none;
-   animation-play-state: paused;
-}
 .shacker-on-pause
 {
    text-decoration: none;
@@ -183,4 +180,28 @@ h6, .h6
    animation-iteration-count: infinite;
    animation-direction: normal;
    animation-fill-mode: none;
+}
+.red_good
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: red_probe;
+   animation-duration: 500ms;
+   animation-delay: 100ms;
+   animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.red_good_back
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: red_probe-2;
+   animation-duration: 500ms;
+   animation-delay: 0ms;
+   animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
 }
