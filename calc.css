@@ -1,0 +1,186 @@
+@keyframes shacker
+{
+   0% { transform: translate(-3px,0px) rotate(0deg) ;  }
+   33% { transform: translate(3px,0px) rotate(0deg) ;  }
+   66% { transform: translate(-3px,0px) rotate(0deg) ;  }
+   100% { transform: translate(3px,0px) rotate(0deg) ;  }
+}
+@keyframes shacker-on-pause
+{
+   0% { transform: translate(-3px,0px) rotate(0deg) ;  }
+   100% { transform: translate(-3px,0px) rotate(0deg) ;  }
+}
+h1, .h1
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 32px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h2, .h2
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 27px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h3, .h3
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 24px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h4, .h4
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 21px;
+   font-style: italic;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h5, .h5
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 19px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h6, .h6
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+.CustomStyle
+{
+   font-family: "Courier New";
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #2E74B5;
+   --color: #2E74B5;
+   background-color: transparent;
+}
+.arta
+{
+   text-decoration: none;
+   background-color: #D0AA98;
+   --background-color: rgba(208,170,152,1.00);
+}
+.red
+{
+   text-decoration: none;
+   background-color: rgba(255,0,0,0.39);
+   --background-color: rgba(255,0,0,0.39);
+}
+.lt
+{
+   text-decoration: none;
+   background-color: #82C182;
+   --background-color: rgba(130,193,130,1.00);
+}
+.st
+{
+   text-decoration: none;
+   background-color: #FFEB82;
+   --background-color: rgba(255,235,130,1.00);
+}
+.pt
+{
+   text-decoration: none;
+   background-color: #8282FF;
+   --background-color: rgba(130,130,255,1.00);
+}
+.tt
+{
+   text-decoration: none;
+   background-color: #B5B5B5;
+   --background-color: rgba(181,181,181,1.00);
+}
+.shacker
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: shacker;
+   animation-duration: 2000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+   animation-fill-mode: none;
+}
+.nation
+{
+   text-decoration: none;
+   background-color: rgba(220,220,220,0.59);
+   --background-color: rgba(220,220,220,0.59);
+}
+.nation2
+{
+   text-decoration: none;
+   background-color: #D3D3D3;
+   --background-color: rgba(211,211,211,1.00);
+}
+.shacker_pause
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: shacker;
+   animation-duration: 1ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: alternate;
+   animation-fill-mode: none;
+   animation-play-state: paused;
+}
+.shacker-on-pause
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: shacker-on-pause;
+   animation-duration: 500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
+}
