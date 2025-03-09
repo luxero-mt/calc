@@ -1,0 +1,725 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Калькулятор прокачки. Техника СССР.</title>
+<meta name="generator" content="WYSIWYG Web Builder 19 - https://www.wysiwygwebbuilder.com">
+<link href="calc.css" rel="stylesheet">
+<link href="index.css" rel="stylesheet">
+<script src="jquery-3.7.1.min.js"></script>
+<script src="wwb19.min.js"></script>
+<style>
+       /* Стили всплывающих окон */
+        .custom-popup {
+            position: absolute;
+            display: none;
+            z-index: 9999;
+            min-width: 100px;
+            max-width: 250px;
+            background: white;
+            border: 1px solid #000;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: Liberation Sans Narrow;
+            font-size: 13px;
+            color: #000;
+        }
+
+        /* Заголовок окна */
+        .popup-header {
+            display: flex;
+            justify-content: flex-end;
+            padding-bottom: 10px;
+        }
+
+        /* Крестик закрытия */
+        .close-button {
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000;
+            margin-left: 10px;
+        }
+
+        .close-button:hover {
+            color: #000;
+        }
+
+        /* Стили для строк пути */
+        .path-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+
+        .tank-name {
+            font-weight: normal;
+        }
+
+        .exp-value {
+            color: #000000;
+        }
+
+        .total-exp {
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: right;
+        }
+        /* Стиль для контейнера с "Итого" */
+.total-exp {
+    display: flex;
+    justify-content: space-between; /* Размещает элементы по краям */
+    align-items: center; /* Выравнивает элементы по вертикали */
+    margin-top: 10px;
+}
+
+/* Стиль для левой части ("Итого") */
+.total-label {
+    font-weight: bold; /* Жирный шрифт */
+    text-align: left; /* Выравнивание по левому краю */
+}
+
+/* Стиль для правой части (результата) */
+.total-value {
+    font-weight: bold; /* Жирный шрифт */
+    color: #000000; /* Цвет текста */
+    text-align: right; /* Выравнивание по правому краю */
+}
+    </style>
+</head>
+<body>
+<!-- Всплывающие окна -->
+<div id="successPopup" class="custom-popup">
+    <div class="popup-header">
+        <span class="close-button" onclick="closePopup('successPopup')">&times;</span>
+    </div>
+    <div id="pathDetails"></div>
+</div>
+
+<div id="errorDifferentBranch" class="custom-popup">
+    <div class="popup-header">
+        <span class="close-button" onclick="closePopup('errorDifferentBranch')">&times;</span>
+    </div>
+    <p>Ошибка: Танки из разных веток!</p>
+</div>
+
+<div id="wb_arrow37" style="position:absolute;left:137px;top:507px;width:25px;height:10px;z-index:0;">
+<img src="images/arrow.png" id="arrow37" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow36" style="position:absolute;left:249px;top:507px;width:25px;height:10px;z-index:1;">
+<img src="images/arrow.png" id="arrow36" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow35" style="position:absolute;left:361px;top:507px;width:25px;height:10px;z-index:2;">
+<img src="images/arrow.png" id="arrow35" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow34" style="position:absolute;left:473px;top:507px;width:25px;height:10px;z-index:3;">
+<img src="images/arrow.png" id="arrow34" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow33" style="position:absolute;left:585px;top:507px;width:25px;height:10px;z-index:4;">
+<img src="images/arrow.png" id="arrow33" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow32" style="position:absolute;left:697px;top:507px;width:25px;height:10px;z-index:5;">
+<img src="images/arrow.png" id="arrow32" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow31" style="position:absolute;left:809px;top:507px;width:25px;height:10px;z-index:6;">
+<img src="images/arrow.png" id="arrow31" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow30" style="position:absolute;left:921px;top:507px;width:25px;height:10px;z-index:7;">
+<img src="images/arrow.png" id="arrow30" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow29" style="position:absolute;left:1033px;top:507px;width:25px;height:10px;z-index:8;">
+<img src="images/arrow.png" id="arrow29" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow28" style="position:absolute;left:585px;top:441px;width:25px;height:10px;z-index:9;">
+<img src="images/arrow.png" id="arrow28" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow25" style="position:absolute;left:752px;top:408px;width:10px;height:25px;z-index:10;">
+<img src="images/arrow-2.png" id="arrow25" alt="" class="shaker-on-pause-v" width="10" height="25"></div>
+<div id="wb_arrow27" style="position:absolute;left:921px;top:441px;width:25px;height:10px;z-index:11;">
+<img src="images/arrow.png" id="arrow27" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow26" style="position:absolute;left:1033px;top:441px;width:25px;height:10px;z-index:12;">
+<img src="images/arrow.png" id="arrow26" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow24" style="position:absolute;left:137px;top:375px;width:25px;height:10px;z-index:13;">
+<img src="images/arrow.png" id="arrow24" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow23" style="position:absolute;left:249px;top:375px;width:25px;height:10px;z-index:14;">
+<img src="images/arrow.png" id="arrow23" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow22" style="position:absolute;left:361px;top:375px;width:25px;height:10px;z-index:15;">
+<img src="images/arrow.png" id="arrow22" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow21" style="position:absolute;left:473px;top:375px;width:25px;height:10px;z-index:16;">
+<img src="images/arrow.png" id="arrow21" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow20" style="position:absolute;left:585px;top:375px;width:25px;height:10px;z-index:17;">
+<img src="images/arrow.png" id="arrow20" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow19" style="position:absolute;left:697px;top:375px;width:25px;height:10px;z-index:18;">
+<img src="images/arrow.png" id="arrow19" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow18" style="position:absolute;left:809px;top:375px;width:25px;height:10px;z-index:19;">
+<img src="images/arrow.png" id="arrow18" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow17" style="position:absolute;left:921px;top:375px;width:25px;height:10px;z-index:20;">
+<img src="images/arrow.png" id="arrow17" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow13" style="position:absolute;left:921px;top:309px;width:25px;height:10px;z-index:21;">
+<img src="images/arrow.png" id="arrow13" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow16" style="position:absolute;left:1033px;top:375px;width:25px;height:10px;z-index:22;">
+<img src="images/arrow.png" id="arrow16" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow15" style="position:absolute;left:697px;top:309px;width:25px;height:10px;z-index:23;">
+<img src="images/arrow.png" id="arrow15" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow14" style="position:absolute;left:809px;top:309px;width:25px;height:10px;z-index:24;">
+<img src="images/arrow.png" id="arrow14" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow11" style="position:absolute;left:585px;top:243px;width:25px;height:10px;z-index:25;">
+<img src="images/arrow2.png" id="arrow11" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow12" style="position:absolute;left:1033px;top:309px;width:25px;height:10px;z-index:26;">
+<img src="images/arrow.png" id="arrow12" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow10" style="position:absolute;left:697px;top:243px;width:25px;height:10px;z-index:27;">
+<img src="images/arrow.png" id="arrow10" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow09" style="position:absolute;left:809px;top:243px;width:25px;height:10px;z-index:28;">
+<img src="images/arrow.png" id="arrow09" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow08" style="position:absolute;left:921px;top:243px;width:25px;height:10px;z-index:29;">
+<img src="images/arrow.png" id="arrow08" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow07" style="position:absolute;left:1033px;top:243px;width:25px;height:10px;z-index:30;">
+<img src="images/arrow.png" id="arrow07" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow06" style="position:absolute;left:473px;top:177px;width:25px;height:10px;z-index:31;">
+<img src="images/arrow.png" id="arrow06" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow05" style="position:absolute;left:585px;top:177px;width:25px;height:10px;z-index:32;">
+<img src="images/arrow.png" id="arrow05" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow04" style="position:absolute;left:697px;top:177px;width:25px;height:10px;z-index:33;">
+<img src="images/arrow.png" id="arrow04" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow03" style="position:absolute;left:809px;top:177px;width:25px;height:10px;z-index:34;">
+<img src="images/arrow.png" id="arrow03" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow02" style="position:absolute;left:921px;top:177px;width:25px;height:10px;z-index:35;">
+<img src="images/arrow.png" id="arrow02" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_arrow01" style="position:absolute;left:1033px;top:177px;width:25px;height:10px;z-index:36;">
+<img src="images/arrow.png" id="arrow01" alt="" class="shacker-on-pause" width="25" height="10"></div>
+<div id="wb_Image73" style="position:absolute;left:123px;top:383px;width:23px;height:53px;z-index:37;">
+<img src="images/arrow-from-ms1.png" id="Image73" alt="" width="23" height="53"></div>
+<div id="wb_Image72" style="position:absolute;left:456px;top:185px;width:23px;height:186px;z-index:38;">
+<img src="images/arrow-to-arta.png" id="Image72" alt="" width="23" height="186"></div>
+<div id="wb_Image145" style="position:absolute;left:568px;top:449px;width:23px;height:53px;z-index:39;">
+<img src="images/arrow-from-ms1.png" id="Image145" alt="" width="23" height="53"></div>
+<div id="wb_Image142" style="position:absolute;left:568px;top:251px;width:23px;height:119px;z-index:40;">
+<img src="images/arrow-to-sturm2.png" id="Image142" alt="" width="23" height="119"></div>
+<div id="wb_Image103" style="position:absolute;left:683px;top:317px;width:23px;height:53px;z-index:41;">
+<img src="images/arrow-from-ms1.png" id="Image103" alt="" class="tank" width="23" height="53"></div>
+<div id="wb_Image92" style="position:absolute;left:386px;top:492px;width:96px;height:30px;z-index:42;">
+<img src="images/fon_st.png" id="Image92" alt="" width="96" height="30"></div>
+<div id="wb_Image109" style="position:absolute;left:498px;top:492px;width:96px;height:30px;z-index:43;">
+<img src="images/fon_tt.png" id="Image109" alt="" width="96" height="30"></div>
+<div id="wb_Image110" style="position:absolute;left:610px;top:492px;width:96px;height:30px;z-index:44;">
+<img src="images/fon_tt.png" id="Image110" alt="" width="96" height="30"></div>
+<div id="wb_Image111" style="position:absolute;left:610px;top:426px;width:96px;height:30px;z-index:45;">
+<img src="images/fon_tt.png" id="Image111" alt="" width="96" height="30"></div>
+<div id="wb_Image113" style="position:absolute;left:722px;top:492px;width:96px;height:30px;z-index:46;">
+<img src="images/fon_tt.png" id="Image113" alt="" width="96" height="30"></div>
+<div id="wb_Image115" style="position:absolute;left:834px;top:492px;width:96px;height:30px;z-index:47;">
+<img src="images/fon_tt.png" id="Image115" alt="" width="96" height="30"></div>
+<div id="wb_Image124" style="position:absolute;left:946px;top:492px;width:96px;height:30px;z-index:48;">
+<img src="images/fon_tt.png" id="Image124" alt="" width="96" height="30"></div>
+<div id="wb_Image127" style="position:absolute;left:1058px;top:492px;width:96px;height:30px;z-index:49;">
+<img src="images/fon_tt.png" id="Image127" alt="" width="96" height="30"></div>
+<div id="wb_Image128" style="position:absolute;left:946px;top:426px;width:96px;height:30px;z-index:50;">
+<img src="images/fon_tt.png" id="Image128" alt="" width="96" height="30"></div>
+<div id="wb_Image131" style="position:absolute;left:1058px;top:426px;width:96px;height:30px;z-index:51;">
+<img src="images/fon_tt.png" id="Image131" alt="" width="96" height="30"></div>
+<div id="wb_Image132" style="position:absolute;left:1170px;top:426px;width:96px;height:30px;z-index:52;">
+<img src="images/fon_tt.png" id="Image132" alt="" width="96" height="30"></div>
+<div id="wb_Image3" style="position:absolute;left:274px;top:492px;width:96px;height:30px;z-index:53;">
+<img src="images/fon_lt.png" id="Image3" alt="" width="96" height="30"></div>
+<div id="wb_Image4" style="position:absolute;left:162px;top:492px;width:96px;height:30px;z-index:54;">
+<img src="images/fon_lt.png" id="Image4" alt="" width="96" height="30"></div>
+<div id="wb_Image21" style="position:absolute;left:50px;top:426px;width:96px;height:30px;z-index:55;">
+<img src="images/fon_lt.png" id="Image21" alt="" width="96" height="30"></div>
+<div id="wb_Image22" style="position:absolute;left:162px;top:360px;width:96px;height:30px;z-index:56;">
+<img src="images/fon_lt.png" id="Image22" alt="" width="96" height="30"></div>
+<div id="wb_Image46" style="position:absolute;left:274px;top:360px;width:96px;height:30px;z-index:57;">
+<img src="images/fon_lt.png" id="Image46" alt="" width="96" height="30"></div>
+<div id="wb_Image74" style="position:absolute;left:386px;top:360px;width:96px;height:30px;z-index:58;">
+<img src="images/fon_pt.png" id="Image74" alt="" width="96" height="30"></div>
+<div id="wb_Image75" style="position:absolute;left:498px;top:360px;width:96px;height:30px;z-index:59;">
+<img src="images/fon_pt.png" id="Image75" alt="" width="96" height="30"></div>
+<div id="wb_Image77" style="position:absolute;left:610px;top:360px;width:96px;height:30px;z-index:60;">
+<img src="images/fon_pt.png" id="Image77" alt="" width="96" height="30"></div>
+<div id="wb_Image78" style="position:absolute;left:722px;top:360px;width:96px;height:30px;z-index:61;">
+<img src="images/fon_pt.png" id="Image78" alt="" width="96" height="30"></div>
+<div id="wb_Image80" style="position:absolute;left:834px;top:360px;width:96px;height:30px;z-index:62;">
+<img src="images/fon_pt.png" id="Image80" alt="" width="96" height="30"></div>
+<div id="wb_Image82" style="position:absolute;left:946px;top:360px;width:96px;height:30px;z-index:63;">
+<img src="images/fon_pt.png" id="Image82" alt="" width="96" height="30"></div>
+<div id="wb_Image84" style="position:absolute;left:1059px;top:360px;width:96px;height:30px;z-index:64;">
+<img src="images/fon_pt.png" id="Image84" alt="" width="96" height="30"></div>
+<div id="wb_Image86" style="position:absolute;left:722px;top:295px;width:96px;height:30px;z-index:65;">
+<img src="images/fon_pt.png" id="Image86" alt="" width="96" height="30"></div>
+<div id="wb_Image88" style="position:absolute;left:834px;top:294px;width:96px;height:30px;z-index:66;">
+<img src="images/fon_pt.png" id="Image88" alt="" width="96" height="30"></div>
+<div id="wb_Image90" style="position:absolute;left:946px;top:295px;width:96px;height:30px;z-index:67;">
+<img src="images/fon_pt.png" id="Image90" alt="" width="96" height="30"></div>
+<div id="wb_Image2" style="position:absolute;left:1058px;top:294px;width:96px;height:30px;z-index:68;">
+<img src="images/fon_pt.png" id="Image2" alt="" width="96" height="30"></div>
+<div id="wb_Image5" style="position:absolute;left:610px;top:228px;width:96px;height:30px;z-index:69;">
+<img src="images/fon dlya arti.png" id="Image5" alt="" width="96" height="30"></div>
+<div id="wb_Image6" style="position:absolute;left:722px;top:228px;width:96px;height:30px;z-index:70;">
+<img src="images/fon dlya arti.png" id="Image6" alt="" width="96" height="30"></div>
+<div id="wb_Image13" style="position:absolute;left:834px;top:228px;width:96px;height:30px;z-index:71;">
+<img src="images/fon dlya arti.png" id="Image13" alt="" width="96" height="30"></div>
+<div id="wb_Image14" style="position:absolute;left:946px;top:228px;width:96px;height:30px;z-index:72;">
+<img src="images/fon dlya arti.png" id="Image14" alt="" width="96" height="30"></div>
+<div id="wb_Image15" style="position:absolute;left:1058px;top:228px;width:96px;height:30px;z-index:73;">
+<img src="images/fon dlya arti.png" id="Image15" alt="" width="96" height="30"></div>
+<div id="wb_Image16" style="position:absolute;left:498px;top:162px;width:96px;height:30px;z-index:74;">
+<img src="images/fon dlya arti.png" id="Image16" alt="" width="96" height="30"></div>
+<div id="wb_Image17" style="position:absolute;left:610px;top:162px;width:96px;height:30px;z-index:75;">
+<img src="images/fon dlya arti.png" id="Image17" alt="" width="96" height="30"></div>
+<div id="wb_Image18" style="position:absolute;left:722px;top:162px;width:96px;height:30px;z-index:76;">
+<img src="images/fon dlya arti.png" id="Image18" alt="" width="96" height="30"></div>
+<div id="wb_Image19" style="position:absolute;left:834px;top:162px;width:96px;height:30px;z-index:77;">
+<img src="images/fon dlya arti.png" id="Image19" alt="" width="96" height="30"></div>
+<div id="wb_Image20" style="position:absolute;left:946px;top:162px;width:96px;height:30px;z-index:78;">
+<img src="images/fon dlya arti.png" id="Image20" alt="" width="96" height="30"></div>
+<div id="wb_Image147" style="position:absolute;left:123px;top:466px;width:23px;height:53px;z-index:79;">
+<img src="images/arrow-from-ms1_vf.png" id="Image147" alt="" width="23" height="53"></div>
+<div id="wb_Image1" style="position:absolute;left:1058px;top:162px;width:96px;height:30px;z-index:80;">
+<img src="images/fon dlya arti.png" id="Image1" alt="" width="96" height="30"></div>
+<div id="wb_Image146" style="position:absolute;left:904px;top:449px;width:23px;height:53px;z-index:81;">
+<img src="images/arrow-from-ms1.png" id="Image146" alt="" width="23" height="53"></div>
+<div id="wb_t-5-1-ar-01" style="position:absolute;left:498px;top:162px;width:96px;height:30px;z-index:82;">
+<a href="#" onclick="SetClass('#t-5-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/ussr-R100_SU122A.png" id="t-5-1-ar-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-6-1-ar-01" style="position:absolute;left:610px;top:162px;width:96px;height:30px;z-index:83;">
+<a href="#" onclick="SetClass('#t-6-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/ussr-R26_SU-8.png" id="t-6-1-ar-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-7-1-ar-01" style="position:absolute;left:722px;top:162px;width:96px;height:30px;z-index:84;">
+<a href="#" onclick="SetClass('#t-7-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-7-1-ar-01-f','red');SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow04','shacker');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-7-1-ar-01-f','white');SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow04','shacker-on-pause');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/ussr-R15_S-51.png" id="t-7-1-ar-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-8-1-ar-01" style="position:absolute;left:834px;top:162px;width:96px;height:30px;z-index:85;">
+<a href="#" onclick="SetClass('#t-8-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-8-1-ar-01-f','red');SetClass('#t-7-1-ar-01-f','red');SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow03','shacker');SetClass('#arrow04','shacker');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-8-1-ar-01-f','white');SetClass('#t-7-1-ar-01-f','white');SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow03','shacker-on-pause');SetClass('#arrow04','shacker-on-pause');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/ussr-R27_SU-14.png" id="t-8-1-ar-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-9-1-ar-01" style="position:absolute;left:946px;top:162px;width:96px;height:30px;z-index:86;">
+<a href="#" onclick="SetClass('#t-9-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-9-1-ar-01-f','red');SetClass('#t-8-1-ar-01-f','red');SetClass('#t-7-1-ar-01-f','red');SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow02','shacker');SetClass('#arrow03','shacker');SetClass('#arrow04','shacker');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-9-1-ar-01-f','white');SetClass('#t-8-1-ar-01-f','white');SetClass('#t-7-1-ar-01-f','white');SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow02','shacker-on-pause');SetClass('#arrow03','shacker-on-pause');SetClass('#arrow04','shacker-on-pause');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/ussr-R51_Object_212.png" id="t-9-1-ar-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-10-1-ar-01" style="position:absolute;left:1058px;top:162px;width:96px;height:30px;z-index:87;">
+<a href="#" onclick="SetClass('#t-10-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-10-1-ar-01-f','red');SetClass('#t-9-1-ar-01-f','red');SetClass('#t-8-1-ar-01-f','red');SetClass('#t-7-1-ar-01-f','red');SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow01','shacker');SetClass('#arrow02','shacker');SetClass('#arrow03','shacker');SetClass('#arrow04','shacker');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-10-1-ar-01-f','white');SetClass('#t-9-1-ar-01-f','white');SetClass('#t-8-1-ar-01-f','white');SetClass('#t-7-1-ar-01-f','white');SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow01','shacker-on-pause');SetClass('#arrow02','shacker-on-pause');SetClass('#arrow03','shacker-on-pause');SetClass('#arrow04','shacker-on-pause');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/ussr-R52_Object_261.png" id="t-10-1-ar-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-5-1-ar-01-f" style="position:absolute;left:498px;top:192px;width:96px;height:18px;z-index:88;">
+<a href="#" onclick="SetClass('#t-5-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/su-122a.png" id="t-5-1-ar-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_t-6-1-ar-01-f" style="position:absolute;left:610px;top:192px;width:96px;height:18px;z-index:89;">
+<a href="#" onclick="SetClass('#t-6-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/su-8.png" id="t-6-1-ar-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_t-7-1-ar-01-f" style="position:absolute;left:722px;top:192px;width:96px;height:18px;z-index:90;">
+<a href="#" onclick="SetClass('#t-7-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-7-1-ar-01-f','red');SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow04','shacker');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-7-1-ar-01-f','white');SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow04','shacker-on-pause');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/s-51.png" id="t-7-1-ar-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_t-8-1-ar-01-f" style="position:absolute;left:834px;top:192px;width:96px;height:18px;z-index:91;">
+<a href="#" onclick="SetClass('#t-8-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-8-1-ar-01-f','red');SetClass('#t-7-1-ar-01-f','red');SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow03','shacker');SetClass('#arrow04','shacker');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-8-1-ar-01-f','white');SetClass('#t-7-1-ar-01-f','white');SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow03','shacker-on-pause');SetClass('#arrow04','shacker-on-pause');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/su-14-2.png" id="t-8-1-ar-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_t-9-1-ar-01-f" style="position:absolute;left:946px;top:192px;width:96px;height:18px;z-index:92;">
+<a href="#" onclick="SetClass('#t-9-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-9-1-ar-01-f','red');SetClass('#t-8-1-ar-01-f','red');SetClass('#t-7-1-ar-01-f','red');SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow02','shacker');SetClass('#arrow03','shacker');SetClass('#arrow04','shacker');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-9-1-ar-01-f','white');SetClass('#t-8-1-ar-01-f','white');SetClass('#t-7-1-ar-01-f','white');SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow02','shacker-on-pause');SetClass('#arrow03','shacker-on-pause');SetClass('#arrow04','shacker-on-pause');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/212a.png" id="t-9-1-ar-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_t-10-1-ar-01-f" style="position:absolute;left:1058px;top:192px;width:96px;height:18px;z-index:93;">
+<a href="#" onclick="SetClass('#t-10-1-ar-01','selected-tank');return false;" onmouseover="SetClass('#t-10-1-ar-01-f','red');SetClass('#t-9-1-ar-01-f','red');SetClass('#t-8-1-ar-01-f','red');SetClass('#t-7-1-ar-01-f','red');SetClass('#t-6-1-ar-01-f','red');SetClass('#t-5-1-ar-01-f','red');SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow01','shacker');SetClass('#arrow02','shacker');SetClass('#arrow03','shacker');SetClass('#arrow04','shacker');SetClass('#arrow05','shacker');SetClass('#arrow06','shacker');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-10-1-ar-01-f','white');SetClass('#t-9-1-ar-01-f','white');SetClass('#t-8-1-ar-01-f','white');SetClass('#t-7-1-ar-01-f','white');SetClass('#t-6-1-ar-01-f','white');SetClass('#t-5-1-ar-01-f','white');SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow01','shacker-on-pause');SetClass('#arrow02','shacker-on-pause');SetClass('#arrow03','shacker-on-pause');SetClass('#arrow04','shacker-on-pause');SetClass('#arrow05','shacker-on-pause');SetClass('#arrow06','shacker-on-pause');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/261.png" id="t-10-1-ar-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_t-10-2-ar-01" style="position:absolute;left:1058px;top:228px;width:96px;height:30px;z-index:94;">
+<img src="images/ussr-R211_Object_261_4.png" id="t-10-2-ar-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-9-2-ar-01" style="position:absolute;left:946px;top:228px;width:96px;height:30px;z-index:95;">
+<img src="images/ussr-R167_Object_715_G.png" id="t-9-2-ar-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-8-2-ar-01" style="position:absolute;left:834px;top:228px;width:96px;height:30px;z-index:96;">
+<img src="images/ussr-R210_ISU_2SH.png" id="t-8-2-ar-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-7-2-ar-01" style="position:absolute;left:722px;top:228px;width:96px;height:30px;z-index:97;">
+<img src="images/ussr-R166_SU_D15.png" id="t-7-2-ar-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-6-2-ar-01" style="position:absolute;left:610px;top:228px;width:96px;height:30px;z-index:98;">
+<img src="images/ussr-R163_SU_122.png" id="t-6-2-ar-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-5-2_3_4-pt-01" style="position:absolute;left:498px;top:360px;width:96px;height:30px;z-index:99;">
+<img src="images/ussr-R02_SU-85.png" id="t-5-2_3_4-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-4-1_2_3_4-pt-01" style="position:absolute;left:386px;top:360px;width:96px;height:30px;z-index:100;">
+<a href="#" onclick="SetClass('#t-4-1_2_3_4-pt-01','selected-tank');return false;" onmouseover="SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/ussr-R24_SU-76.png" id="t-4-1_2_3_4-pt-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-3-1_2_3_4-lt-01" style="position:absolute;left:274px;top:360px;width:96px;height:30px;z-index:101;">
+<a href="#" onclick="SetClass('#t-3-1_2_3_4-lt-01','selected-tank');return false;" onmouseover="SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/ussr-R43_T-70.png" id="t-3-1_2_3_4-lt-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-2-1_2_3_4-lt-01" style="position:absolute;left:162px;top:360px;width:96px;height:30px;z-index:102;">
+<a href="#" onclick="SetClass('#t-2-1_2_3_4-lt-01','selected-tank');return false;" onmouseover="SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/ussr-R42_T-60.png" id="t-2-1_2_3_4-lt-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-1-1_2_3_4_5_6-lt-01" style="position:absolute;left:50px;top:426px;width:96px;height:30px;z-index:103;">
+<a href="#" onclick="SetClass('#t-1-1_2_3_4_5_6-lt-01','selected-tank');return false;" onmouseover="SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');return false;" onmouseout="SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');return false;"><img src="images/ussr-R11_MS-1.png" id="t-1-1_2_3_4_5_6-lt-01" alt="" class="tank" width="96" height="30"></a></div>
+<div id="wb_t-5-2_3_4-pt-01-f" style="position:absolute;left:498px;top:390px;width:96px;height:18px;z-index:104;">
+<img src="images/su-85.png" id="t-5-2_3_4-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-4-1_2_3_4-pt-01-f" style="position:absolute;left:386px;top:390px;width:96px;height:18px;z-index:105;">
+<a href="#" onclick="SetClass('#t-4-1_2_3_4-pt-01','selected-tank');return false;" onmouseover="SetClass('#t-4-1_2_3_4-pt-01-f','red');SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow22','shacker');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-4-1_2_3_4-pt-01-f','white');SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow22','shacker-on-pause');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/su-76m.png" id="t-4-1_2_3_4-pt-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_t-3-1_2_3_4-lt-01-f" style="position:absolute;left:274px;top:390px;width:96px;height:18px;z-index:106;">
+<a href="#" onclick="SetClass('#t-3-1_2_3_4-lt-01','selected-tank');return false;" onmouseover="SetClass('#t-3-1_2_3_4-lt-01-f','red');SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow23','shacker');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-3-1_2_3_4-lt-01-f','white');SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow23','shacker-on-pause');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/t-70.png" id="t-3-1_2_3_4-lt-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_t-2-1_2_3_4-lt-01-f" style="position:absolute;left:162px;top:390px;width:96px;height:18px;z-index:107;">
+<a href="#" onclick="SetClass('#t-2-1_2_3_4-lt-01','selected-tank');return false;" onmouseover="SetClass('#t-2-1_2_3_4-lt-01-f','red');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');SetClass('#arrow24','shacker');return false;" onmouseout="SetClass('#t-2-1_2_3_4-lt-01-f','white');SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');SetClass('#arrow24','shacker-on-pause');return false;"><img src="images/t-60.png" id="t-2-1_2_3_4-lt-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_t-10-2-ar-01-f" style="position:absolute;left:1058px;top:258px;width:96px;height:18px;z-index:108;">
+<img src="images/261-4.png" id="t-10-2-ar-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-9-2-ar-01-f" style="position:absolute;left:946px;top:258px;width:96px;height:18px;z-index:109;">
+<img src="images/715g.png" id="t-9-2-ar-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-8-2-ar-01-f" style="position:absolute;left:834px;top:258px;width:96px;height:18px;z-index:110;">
+<img src="images/isu-2sh.png" id="t-8-2-ar-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-7-2-ar-01-f" style="position:absolute;left:722px;top:258px;width:96px;height:18px;z-index:111;">
+<img src="images/su-d15.png" id="t-7-2-ar-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-6-2-ar-01-f" style="position:absolute;left:610px;top:258px;width:96px;height:18px;z-index:112;">
+<img src="images/su-122.png" id="t-6-2-ar-01-f" alt="" width="96" height="18"></div>
+<div id="wb_Image48" style="position:absolute;left:1170px;top:96px;width:96px;height:30px;z-index:113;">
+<img src="images/11lvl.png" id="Image48" alt="" width="96" height="30"></div>
+<div id="wb_Image49" style="position:absolute;left:1058px;top:96px;width:96px;height:30px;z-index:114;">
+<img src="images/10lvl.png" id="Image49" alt="" width="96" height="30"></div>
+<div id="wb_Image50" style="position:absolute;left:946px;top:96px;width:96px;height:30px;z-index:115;">
+<img src="images/9lvl.png" id="Image50" alt="" width="96" height="30"></div>
+<div id="wb_Image51" style="position:absolute;left:834px;top:96px;width:96px;height:30px;z-index:116;">
+<img src="images/8lvl.png" id="Image51" alt="" width="96" height="30"></div>
+<div id="wb_Image52" style="position:absolute;left:722px;top:96px;width:96px;height:30px;z-index:117;">
+<img src="images/7lvl.png" id="Image52" alt="" width="96" height="30"></div>
+<div id="wb_Image53" style="position:absolute;left:610px;top:96px;width:96px;height:30px;z-index:118;">
+<img src="images/6lvl.png" id="Image53" alt="" width="96" height="30"></div>
+<div id="wb_Image54" style="position:absolute;left:498px;top:96px;width:96px;height:30px;z-index:119;">
+<img src="images/5lvl.png" id="Image54" alt="" width="96" height="30"></div>
+<div id="wb_Image55" style="position:absolute;left:386px;top:96px;width:96px;height:30px;z-index:120;">
+<img src="images/4lvl.png" id="Image55" alt="" width="96" height="30"></div>
+<div id="wb_Image56" style="position:absolute;left:274px;top:96px;width:96px;height:30px;z-index:121;">
+<img src="images/3lvl.png" id="Image56" alt="" width="96" height="30"></div>
+<div id="wb_Image57" style="position:absolute;left:162px;top:96px;width:96px;height:30px;z-index:122;">
+<img src="images/2lvl.png" id="Image57" alt="" width="96" height="30"></div>
+<div id="wb_Image58" style="position:absolute;left:50px;top:96px;width:96px;height:30px;z-index:123;">
+<img src="images/1lvl.png" id="Image58" alt="" width="96" height="30"></div>
+<div id="wb_Image59" style="position:absolute;left:50px;top:30px;width:102px;height:40px;z-index:124;">
+<img src="images/ussr.png" id="Image59" alt="" class="red" title="Техника СССР" width="102" height="40"></div>
+<div id="wb_Image60" style="position:absolute;left:152px;top:30px;width:102px;height:40px;z-index:125;">
+<a href="./index1.html" title="Техника Германии" onmouseover="SetClass('#Image60','nation2');return false;" onmouseout="SetClass('#Image60','nation');return false;"><img src="images/ger.png" id="Image60" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image61" style="position:absolute;left:254px;top:30px;width:102px;height:40px;z-index:126;">
+<a href="./index2.html" title="Техника США" onmouseover="SetClass('#Image61','nation2');return false;" onmouseout="SetClass('#Image61','nation');return false;"><img src="images/usa.png" id="Image61" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image62" style="position:absolute;left:356px;top:30px;width:102px;height:40px;z-index:127;">
+<a href="#" onmouseover="SetClass('#Image62','nation2');return false;" onmouseout="SetClass('#Image62','nation');return false;"><img src="images/fra.png" id="Image62" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image63" style="position:absolute;left:458px;top:30px;width:102px;height:40px;z-index:128;">
+<a href="#" onmouseover="SetClass('#Image63','nation2');return false;" onmouseout="SetClass('#Image63','nation');return false;"><img src="images/gb.png" id="Image63" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image64" style="position:absolute;left:560px;top:30px;width:102px;height:40px;z-index:129;">
+<a href="#" onmouseover="SetClass('#Image64','nation2');return false;" onmouseout="SetClass('#Image64','nation');return false;"><img src="images/chs.png" id="Image64" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image65" style="position:absolute;left:662px;top:30px;width:102px;height:40px;z-index:130;">
+<a href="#" onmouseover="SetClass('#Image65','nation2');return false;" onmouseout="SetClass('#Image65','nation');return false;"><img src="images/chin.png" id="Image65" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image66" style="position:absolute;left:764px;top:30px;width:102px;height:40px;z-index:131;">
+<a href="#" onmouseover="SetClass('#Image66','nation2');return false;" onmouseout="SetClass('#Image66','nation');return false;"><img src="images/jpn.png" id="Image66" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image67" style="position:absolute;left:866px;top:30px;width:102px;height:40px;z-index:132;">
+<a href="#" onmouseover="SetClass('#Image67','nation2');return false;" onmouseout="SetClass('#Image67','nation');return false;"><img src="images/pl.png" id="Image67" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image68" style="position:absolute;left:968px;top:30px;width:102px;height:40px;z-index:133;">
+<a href="#" onmouseover="SetClass('#Image68','nation2');return false;" onmouseout="SetClass('#Image68','nation');return false;"><img src="images/swe.png" id="Image68" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image69" style="position:absolute;left:1070px;top:30px;width:102px;height:40px;z-index:134;">
+<a href="#" onmouseover="SetClass('#Image69','nation2');return false;" onmouseout="SetClass('#Image69','nation');return false;"><img src="images/ita.png" id="Image69" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_Image70" style="position:absolute;left:1172px;top:30px;width:102px;height:40px;z-index:135;">
+<a href="#" onmouseover="SetClass('#Image70','nation2');return false;" onmouseout="SetClass('#Image70','nation');return false;"><img src="images/sbor.png" id="Image70" alt="" class="nation" width="102" height="40"></a></div>
+<div id="wb_t-10-3-pt-01" style="position:absolute;left:1058px;top:294px;width:96px;height:30px;z-index:136;">
+<img src="images/ussr-R149_Object_268_4.png" id="t-10-3-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-10-3-pt-01-f" style="position:absolute;left:1058px;top:324px;width:96px;height:18px;z-index:137;">
+<img src="images/268-4title.png" id="t-10-3-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-9-4-pt-01" style="position:absolute;left:946px;top:360px;width:96px;height:30px;z-index:138;">
+<img src="images/ussr-R53_Object_704.png" id="t-9-4-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-9-4-pt-01-f" style="position:absolute;left:946px;top:390px;width:96px;height:18px;z-index:139;">
+<img src="images/704title.png" id="t-9-4-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-8-4-pt-01" style="position:absolute;left:834px;top:360px;width:96px;height:30px;z-index:140;">
+<img src="images/ussr-R47_ISU-152.png" id="t-8-4-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-8-4-pt-01-f" style="position:absolute;left:834px;top:390px;width:96px;height:18px;z-index:141;">
+<img src="images/isu-152title.png" id="t-8-4-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-7-4-pt-01" style="position:absolute;left:722px;top:360px;width:96px;height:30px;z-index:142;">
+<img src="images/ussr-R18_SU-152.png" id="t-7-4-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-7-4-pt-01-f" style="position:absolute;left:722px;top:390px;width:96px;height:18px;z-index:143;">
+<img src="images/su-152title.png" id="t-7-4-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-6-3_4-pt-01" style="position:absolute;left:610px;top:360px;width:96px;height:30px;z-index:144;">
+<img src="images/ussr-R17_SU-100.png" id="t-6-3_4-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-6-3_4-pt-01-f" style="position:absolute;left:610px;top:390px;width:96px;height:18px;z-index:145;">
+<img src="images/su-100title.png" id="t-6-3_4-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-10-4-pt-01" style="position:absolute;left:1058px;top:360px;width:96px;height:30px;z-index:146;">
+<img src="images/ussr-R88_Object268.png" id="t-10-4-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-10-4-pt-01-f" style="position:absolute;left:1058px;top:390px;width:96px;height:18px;z-index:147;">
+<img src="images/268title.png" id="t-10-4-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-9-3-pt-01" style="position:absolute;left:946px;top:294px;width:96px;height:30px;z-index:148;">
+<img src="images/ussr-R93_Object263.png" id="t-9-3-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-9-3-pt-01-f" style="position:absolute;left:946px;top:324px;width:96px;height:18px;z-index:149;">
+<img src="images/263title.png" id="t-9-3-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-8-3-pt-01" style="position:absolute;left:834px;top:294px;width:96px;height:30px;z-index:150;">
+<img src="images/ussr-R58_SU-101.png" id="t-8-3-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-8-3-pt-01-f" style="position:absolute;left:834px;top:324px;width:96px;height:18px;z-index:151;">
+<img src="images/su-101title.png" id="t-8-3-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-7-3-pt-01" style="position:absolute;left:722px;top:294px;width:96px;height:30px;z-index:152;">
+<img src="images/ussr-R74_SU100M1.png" id="t-7-3-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-7-3-pt-01-f" style="position:absolute;left:722px;top:324px;width:96px;height:18px;z-index:153;">
+<img src="images/su-100m1title.png" id="t-7-3-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-6-4-pt-01" style="position:absolute;left:610px;top:426px;width:96px;height:30px;z-index:154;">
+<img src="images/ussr-R77_KV2.png" id="t-6-4-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-6-4-pt-01-f" style="position:absolute;left:610px;top:456px;width:96px;height:18px;z-index:155;">
+<img src="images/kv-2title.png" id="t-6-4-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-9-5-pt-01" style="position:absolute;left:946px;top:426px;width:96px;height:30px;z-index:156;">
+<img src="images/ussr-R81_IS8.png" id="t-9-5-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-9-5-pt-01-f" style="position:absolute;left:946px;top:456px;width:96px;height:18px;z-index:157;">
+<img src="images/t-10title.png" id="t-9-5-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-10-5-pt-01" style="position:absolute;left:1058px;top:426px;width:96px;height:30px;z-index:158;">
+<img src="images/ussr-R155_Object_277.png" id="t-10-5-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-10-5-pt-01-f" style="position:absolute;left:1058px;top:456px;width:96px;height:18px;z-index:159;">
+<img src="images/277title.png" id="t-10-5-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_Image117" style="position:absolute;left:1170px;top:426px;width:96px;height:30px;z-index:160;">
+<img src="images/ussr-R124_Object_279.png" id="Image117" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_Image118" style="position:absolute;left:1170px;top:456px;width:96px;height:18px;z-index:161;">
+<img src="images/279title.png" id="Image118" alt="" width="96" height="18"></div>
+<div id="wb_t-10-6-pt-01" style="position:absolute;left:1058px;top:492px;width:96px;height:30px;z-index:162;">
+<img src="images/ussr-R45_IS-7.png" id="t-10-6-pt-01" alt="" class="tt" width="96" height="30"></div>
+<div id="wb_t-10-6-pt-01-f" style="position:absolute;left:1058px;top:522px;width:96px;height:18px;z-index:163;">
+<img src="images/is-7tittle.png" id="t-10-6-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-9-6-pt-01-f" style="position:absolute;left:946px;top:522px;width:96px;height:18px;z-index:164;">
+<img src="images/257title.png" id="t-9-6-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-9-6-pt-01" style="position:absolute;left:946px;top:492px;width:96px;height:30px;z-index:165;">
+<img src="images/ussr-R129_Object_257.png" id="t-9-6-pt-01" alt="" class="tt" width="96" height="30"></div>
+<div id="wb_t-8-5_6-pt-01" style="position:absolute;left:834px;top:492px;width:96px;height:30px;z-index:166;">
+<img src="images/ussr-R19_IS-3.png" id="t-8-5_6-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-8-5_6-pt-01-f" style="position:absolute;left:834px;top:522px;width:96px;height:18px;z-index:167;">
+<img src="images/is-3title.png" id="t-8-5_6-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-7-5_6-pt-01-f" style="position:absolute;left:722px;top:522px;width:96px;height:18px;z-index:168;">
+<img src="images/istitle.png" id="t-7-5_6-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-7-5_6-pt-01" style="position:absolute;left:722px;top:492px;width:96px;height:30px;z-index:169;">
+<img src="images/ussr-R01_IS.png" id="t-7-5_6-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-6-5_6-pt-01" style="position:absolute;left:610px;top:492px;width:96px;height:30px;z-index:170;">
+<img src="images/ussr-R13_KV-1s.png" id="t-6-5_6-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-6-5_6-pt-01-f" style="position:absolute;left:610px;top:522px;width:96px;height:18px;z-index:171;">
+<img src="images/kv-1stitle.png" id="t-6-5_6-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-5-4_5_6-pt-01-f" style="position:absolute;left:498px;top:522px;width:96px;height:18px;z-index:172;">
+<img src="images/kv-1title.png" id="t-5-4_5_6-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-5-4_5_6-pt-01" style="position:absolute;left:498px;top:492px;width:96px;height:30px;z-index:173;">
+<img src="images/ussr-R80_KV1.png" id="t-5-4_5_6-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-4-4_5_6-pt-01" style="position:absolute;left:386px;top:492px;width:96px;height:30px;z-index:174;">
+<img src="images/ussr-R06_T-28.png" id="t-4-4_5_6-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-4-4_5_6-pt-01-f" style="position:absolute;left:386px;top:522px;width:96px;height:18px;z-index:175;">
+<img src="images/t-28title.png" id="t-4-4_5_6-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-3-4_5_6-pt-01" style="position:absolute;left:274px;top:492px;width:96px;height:30px;z-index:176;">
+<img src="images/ussr-R174_BT-5.png" id="t-3-4_5_6-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_t-3-4_5_6-pt-01-f" style="position:absolute;left:274px;top:522px;width:96px;height:18px;z-index:177;">
+<img src="images/bt-5title.png" id="t-3-4_5_6-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-2-4_5_6-pt-01-f" style="position:absolute;left:162px;top:522px;width:96px;height:18px;z-index:178;">
+<img src="images/bt-2title.png" id="t-2-4_5_6-pt-01-f" alt="" width="96" height="18"></div>
+<div id="wb_t-2-4_5_6-pt-01" style="position:absolute;left:162px;top:492px;width:96px;height:30px;z-index:179;">
+<img src="images/ussr-R08_BT-2.png" id="t-2-4_5_6-pt-01" alt="" class="tank" width="96" height="30"></div>
+<div id="wb_Image71" style="position:absolute;left:560px;top:304px;width:21px;height:21px;z-index:180;">
+<img src="images/zamochek2.png" id="Image71" alt="" width="21" height="21"></div>
+<div id="wb_Image144" style="position:absolute;left:559px;top:276px;width:23px;height:58px;z-index:181;">
+<img src="images/overlay1.png" id="Image144" alt="" width="23" height="119"></div>
+<div id="wb_t-1-1_2_3_4_5_6-lt-01-f" style="position:absolute;left:50px;top:456px;width:96px;height:18px;z-index:182;">
+<a href="#" onclick="SetClass('#t-1-1_2_3_4_5_6-lt-01','selected-tank');return false;" onmouseover="SetClass('#t-1-1_2_3_4_5_6-lt-01-f','red');return false;" onmouseout="SetClass('#t-1-1_2_3_4_5_6-lt-01-f','white');return false;"><img src="images/ms-1tittle.png" id="t-1-1_2_3_4_5_6-lt-01-f" alt="" width="96" height="18"></a></div>
+<div id="wb_Image102" style="position:absolute;left:706px;top:426px;width:53px;height:23px;z-index:183;">
+<img src="images/arrow-from-ms1-2.png" id="Image102" alt="" width="53" height="23"></div>
+
+
+<script>
+
+// Массив данных о танках
+const tankData = [
+    { 
+        id: "t-10-1-ar-01", 
+        name: "Об. 261", 
+        level: 10, 
+        branches: [1], 
+        minExp: 337000, 
+        maxExp: 387300 
+    },
+      { 
+        id: "t-9-1-ar-01", 
+        name: "212А", 
+        level: 9, 
+        branches: [1], 
+        minExp: 217500, 
+        maxExp: 242615 
+    },
+    { 
+        id: "t-8-1-ar-01", 
+        name: "СУ-14-2", 
+        level: 8, 
+        branches: [1], 
+        minExp: 135665, 
+        maxExp: 216965 
+    },
+    
+    
+    { 
+        id: "t-7-1-ar-01", 
+        name: "С-51", 
+        level: 7, 
+        branches: [1], 
+        minExp: 68800, 
+        maxExp: 73950 
+    },
+   { 
+        id: "t-6-1-ar-01", 
+        name: "СУ-8", 
+        level: 6, 
+        branches: [1], 
+        minExp: 36200, 
+        maxExp: 43850 
+    },
+   { 
+        id: "t-5-1-ar-01", 
+        name: "СУ-122А", 
+        level: 5, 
+        branches: [1], 
+        minExp: 16610, 
+        maxExp: 20090 
+    },
+   { 
+        id: "t-4-1_2_3_4-pt-01", 
+        name: "СУ-76М", 
+        level: 4, 
+        branches: [1], 
+        minExp: 4220, 
+        maxExp: 9680 
+    },
+   { 
+        id: "t-3-1_2_3_4-lt-01", 
+        name: "Т-70", 
+        level: 3, 
+        branches: [1], 
+        minExp: 1235, 
+        maxExp: 1620 
+    },
+   { 
+        id: "t-2-1_2_3_4-lt-01", 
+        name: "Т-60", 
+        level: 2, 
+        branches: [1], 
+        minExp: 310, 
+        maxExp: 310 
+    },
+{ 
+        id: "t-1-1_2_3_4_5_6-lt-01", 
+        name: "МС-1", 
+        level: 1, 
+        branches: [1], 
+        minExp: 0, 
+        maxExp: 0 
+    },
+];
+
+let selectedTanks = [];
+let activePopup = null;
+
+// Функция для добавления класса
+function SetClass(selector, className) {
+    const element = document.querySelector(selector);
+    if (element && className && className.trim() !== "") {
+        element.className = className; // Устанавливаем только один класс
+    }
+}
+
+
+// Функция проверки выбранных танков
+function checkSelectedTanks() {
+    const tanks = document.querySelectorAll('.selected-tank');
+    
+    if (tanks.length < 2) return;
+    if (tanks.length > 2) {
+        resetSelection();
+        alert("Можно выбрать только два танка!");
+        return;
+    }
+
+    const [tankA, tankB] = tanks;
+    const [lvlA, branchesA] = parseId(tankA.id);
+    const [lvlB, branchesB] = parseId(tankB.id);
+
+    // Определение старшего и младшего танка
+    const seniorTank = lvlA > lvlB ? tankA : tankB;
+    const juniorTank = lvlA <= lvlB ? tankA : tankB;
+
+    // Проверка веток
+    const hasCommonBranch = branchesA.some(b => branchesB.includes(b));
+    if (!hasCommonBranch) {
+        showError('errorDifferentBranch', seniorTank);
+        return;
+    }
+
+    // Получаем путь
+    const path = getPath(juniorTank.id, seniorTank.id);
+    if (!path || path.length === 0) {
+        console.error("Путь не найден");
+        return;
+    }
+
+    showPath(path, seniorTank);
+}
+
+// Функция разбора ID
+function parseId(id) {
+    const parts = id.split('-');
+    return [
+        parseInt(parts[1]) || 0,
+        parts[2].split('_').map(Number)
+    ];
+}
+
+// Функция получения пути
+function getPath(startId, endId) {
+    const start = tankData.find(t => t.id === startId);
+    const end = tankData.find(t => t.id === endId);
+
+    if (!start || !end) return null;
+
+    return tankData.filter(tank => 
+        tank.branches.some(b => start.branches.includes(b)) &&
+        tank.level > start.level &&
+        tank.level <= end.level
+    ).sort((a, b) => a.level - b.level);
+}
+
+
+// Функция отображения пути
+function showPath(path, targetElement) {
+    let totalMinExp = 0;
+    let totalMaxExp = 0;
+
+    // Минимальные затраты
+    let html = '<strong>Минимальное количество<br> опыта для исследования:</strong><br>';
+    path.forEach(tank => {
+        html += `<div class="path-row">
+            <span class="tank-name">${tank.name}</span>
+            <span class="exp-value">${tank.minExp.toLocaleString()} опыта</span>
+        </div>`;
+        totalMinExp += tank.minExp;
+    });
+
+    // Итоговые значения для минимальных затрат
+    html += `
+        <div class="total-exp">
+            <span class="total-label">Итого:</span>
+            <span class="total-value">${totalMinExp.toLocaleString()} опыта</span>
+        </div>
+    `;
+
+    html += '<hr><strong>Максимальное количество<br> опыта для исследования:</strong><br>';
+    path.forEach(tank => {
+        html += `<div class="path-row">
+            <span class="tank-name">${tank.name}</span>
+            <span class="exp-value">${tank.maxExp.toLocaleString()} опыта</span>
+        </div>`;
+        totalMaxExp += tank.maxExp;
+    });
+
+    // Итоговые значения для максимальных затрат
+    html += `
+        <div class="total-exp">
+            <span class="total-label">Итого:</span>
+            <span class="total-value">${totalMaxExp.toLocaleString()} опыта</span>
+        </div>
+    `;
+
+    // Отображаем текст во всплывающем окне
+    const popup = document.getElementById('successPopup');
+    popup.querySelector('#pathDetails').innerHTML = html;
+    positionPopup(popup, targetElement);
+    popup.style.display = 'block';
+    activePopup = popup;
+}
+
+// Функция отображения ошибок
+function showError(errorType, targetElement) {
+    const popup = document.getElementById(errorType);
+    positionPopup(popup, targetElement);
+    popup.style.display = 'block';
+    activePopup = popup;
+
+    // Убираем автоматическое закрытие
+    // setTimeout(() => closePopup(errorType), 5000); // УБРАНО
+}
+
+// Позиционирование окна под старшим танком
+function positionPopup(popup, target) {
+    const rect = target.getBoundingClientRect();
+    const top = rect.bottom + window.scrollY + 25; // 25px снизу
+    const left = rect.left + window.scrollX; // Выравниваем левый край
+    
+    popup.style.top = `${top}px`;
+    popup.style.left = `${left}px`;
+}
+
+// Сброс выбора
+function resetSelection() {
+    document.querySelectorAll('.selected-tank').forEach(tank => 
+        tank.classList.remove('selected-tank')
+    );
+    selectedTanks = [];
+    activePopup = null;
+}
+
+// Закрытие окна
+function closePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    popup.style.display = 'none';
+    resetSelection();
+}
+
+// Проверка каждые 500 мс
+setInterval(checkSelectedTanks, 500);
+</script>
+</body>
+</html>

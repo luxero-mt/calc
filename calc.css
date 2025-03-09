@@ -1,0 +1,271 @@
+@keyframes shacker
+{
+   0% { transform: translate(-3px,0px) rotate(0deg) ;  }
+   33% { transform: translate(3px,0px) rotate(0deg) ;  }
+   66% { transform: translate(-3px,0px) rotate(0deg) ;  }
+   100% { transform: translate(3px,0px) rotate(0deg) ;  }
+}
+@keyframes shacker-on-pause
+{
+   0% { transform: translate(-3px,0px) rotate(0deg) ;  }
+   100% { transform: translate(-3px,0px) rotate(0deg) ;  }
+}
+@keyframes red_probe
+{
+   0% { background-color: rgba(255,255,255,0.00);  }
+   100% { background-color: rgba(255,0,0,0.39);  }
+}
+@keyframes red_probe-2
+{
+   0% { background-color: rgba(255,0,0,0.39);  }
+   100% { background-color: rgba(255,255,255,0.00);  }
+}
+@keyframes shacker-v
+{
+   0% { transform: translate(0px,3px) rotate(0deg) ;  }
+   33% { transform: translate(0px,-3px) rotate(0deg) ;  }
+   66% { transform: translate(0px,3px) rotate(0deg) ;  }
+   100% { transform: translate(0px,-3px) rotate(0deg) ;  }
+}
+@keyframes shacker-on-pause-v
+{
+   0% { transform: translate(0px,3px) rotate(0deg) ;  }
+   100% { transform: translate(0px,3px) rotate(0deg) ;  }
+}
+h1, .h1
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 32px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h2, .h2
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 27px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h3, .h3
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 24px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h4, .h4
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 21px;
+   font-style: italic;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h5, .h5
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 19px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h6, .h6
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+.CustomStyle
+{
+   font-family: "Courier New";
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #2E74B5;
+   --color: #2E74B5;
+   background-color: transparent;
+}
+.arta
+{
+   text-decoration: none;
+   background-color: #D0AA98;
+   --background-color: rgba(208,170,152,1.00);
+}
+.red
+{
+   text-decoration: none;
+   background-color: #FF9C9C;
+   --background-color: rgba(255,156,156,1.00);
+}
+.lt
+{
+   text-decoration: none;
+   background-color: #82C182;
+   --background-color: rgba(130,193,130,1.00);
+}
+.st
+{
+   text-decoration: none;
+   background-color: #FFEB82;
+   --background-color: rgba(255,235,130,1.00);
+}
+.pt
+{
+   text-decoration: none;
+   background-color: #8282FF;
+   --background-color: rgba(130,130,255,1.00);
+}
+.tt
+{
+   text-decoration: none;
+   background-color: #B5B5B5;
+   --background-color: rgba(181,181,181,1.00);
+}
+.shacker
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: shacker;
+   animation-duration: 2000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+   animation-fill-mode: none;
+}
+.nation
+{
+   text-decoration: none;
+   background-color: rgba(220,220,220,0.59);
+   --background-color: rgba(220,220,220,0.59);
+}
+.nation2
+{
+   text-decoration: none;
+   background-color: #D3D3D3;
+   --background-color: rgba(211,211,211,1.00);
+}
+.shacker-on-pause
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: shacker-on-pause;
+   animation-duration: 500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
+}
+.red_good
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: red_probe;
+   animation-duration: 500ms;
+   animation-delay: 100ms;
+   animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.red_good_back
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: red_probe-2;
+   animation-duration: 1000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: alternate;
+   animation-fill-mode: forwards;
+}
+.shacker-v
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: shacker-v;
+   animation-duration: 2000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+   animation-fill-mode: none;
+}
+.shaker-on-pause-v
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: shacker-on-pause-v;
+   animation-duration: 500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.darkred
+{
+   text-decoration: none;
+   background-color: #C66060;
+   --background-color: rgba(198,96,96,1.00);
+}
+.white
+{
+   text-decoration: none;
+   background-color: #FFFFFF;
+   --background-color: rgba(255,255,255,1.00);
+}
+.selected-tank
+{
+   text-decoration: none;
+   background-color: #FF9C9C;
+   --background-color: rgba(255,156,156,1.00);
+}
+.tank
+{
+   font-family: "Courier New";
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+}
