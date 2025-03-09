@@ -269,3 +269,9 @@ h6, .h6
    --color: #000000;
    background-color: transparent;
 }
+.black
+{
+   text-decoration: none;
+   background-color: #000000;
+   --background-color: rgba(0,0,0,1.00);
+}
