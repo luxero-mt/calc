@@ -1,0 +1,310 @@
+@font-face
+{
+   font-family: "MOSCOW2024 ";
+   font-display: swap;
+   src: url('MOSCOW2024.otf') format('opentype');
+}
+@keyframes strelka_udlinyalka
+{
+   0% { clip-path: polygon(0% 22%, 35% 22%, 35% 14%, 55% 28%, 35% 42%, 35% 34%, 0% 34%);; background-color: #000000;  }
+   100% { clip-path: polygon(0% 22%, 55% 22%, 55% 14%, 75% 28%, 55% 42%, 55% 34%, 0% 34%);; background-color: #000000;  }
+}
+@keyframes scale-my
+{
+   0% { transform: rotate(0deg) ;  }
+   100% { transform: rotate(0deg) scale(0.94,0.94) ;  }
+}
+@keyframes scale-my2
+{
+   0% { transform: rotate(0deg) scale(0.94,0.94) ;  }
+   100% { transform: rotate(0deg) scale(1.0,1.0) ;  }
+}
+@keyframes scale-my2-stop
+{
+   0% { transform: rotate(0deg) scale(0.90,0.90) ;  }
+   100% { transform: rotate(0deg) scale(0.90,0.90) ;  }
+}
+@keyframes strelka_udlinyalka-pause
+{
+   0% { clip-path: polygon(0% 22%, 35% 22%, 35% 14%, 55% 28%, 35% 42%, 35% 34%, 0% 34%);; background-color: #000000;  }
+   100% { clip-path: polygon(0% 22%, 35% 22%, 35% 14%, 55% 28%, 35% 42%, 35% 34%, 0% 34%);; background-color: #000000;  }
+}
+@keyframes strelka_udlinyalka-infinite
+{
+   0% { clip-path: polygon(-20% 22%, -20% 22%, -20% 14%, 0% 28%,-20% 42%, -20% 34%, -20% 34%);; background-color: #000000;  }
+   100% { clip-path: polygon(0% 22%, 100% 22%, 100% 14%, 120% 28%, 100% 42%, 100% 34%, 0% 34%);; background-color: #000000;  }
+}
+@keyframes strelka_udlinyalka-polosa
+{
+   0% { clip-path: polygon(0% 22%,100% 22%, 100% 34%, 0% 34%); background-color: #000000;  }
+   100% { clip-path: polygon(0% 22%,100% 22%, 100% 34%, 0% 34%); background-color: #000000;  }
+}
+@keyframes scale-my-classes
+{
+   0% { transform: rotate(0deg) ;  }
+   100% { transform: rotate(0deg) scale(0.97,0.97) ;  }
+}
+@keyframes scale-my2-classes
+{
+   0% { transform: rotate(0deg) scale(0.97,0.97) ;  }
+   100% { transform: rotate(0deg) scale(1.0,1.0) ;  }
+}
+@keyframes ugolok_posle_strelki
+{
+   0% { clip-path: polygon(0% 22%, 39% 22%, 39% 34%, 12% 34%, 12% 100%, 0% 100%, 0% 22%); background-color: #000000;  }
+   100% { clip-path: polygon(0% 22%, 39% 22%, 39% 34%, 12% 34%, 12% 100%, 0% 100%, 0% 22%); background-color: #000000;  }
+}
+@keyframes polosa_vniz
+{
+   0% { clip-path: polygon(0% 0%, 12% 0%, 12% 400%, 0% 400%, 0% 0%); background-color: #000000;  }
+   100% { clip-path: polygon(0% 0%, 12% 0%, 12% 400%, 0% 400%, 0% 0%); background-color: #000000;  }
+}
+@keyframes siyaka_kraya
+{
+   0% { box-shadow: 0px 0px 3px #FF0000;  }
+   50% { box-shadow: 0px 0px 5px 5px #FF0000;  }
+   100% { box-shadow: 0px 0px 3px #FF0000;  }
+}
+h1, .h1
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 32px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h2, .h2
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 27px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h3, .h3
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 24px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h4, .h4
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 21px;
+   font-style: italic;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h5, .h5
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 19px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+h6, .h6
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+   margin: 0 0 0 0;
+   padding: 0 0 0 0;
+   display: inline-block;
+}
+.CustomStyle
+{
+   font-family: "Courier New";
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #2E74B5;
+   --color: #2E74B5;
+   background-color: transparent;
+}
+.selected-tank
+{
+   text-decoration: none;
+   background-color: transparent;
+   background-image: url('images/selected_tank.png');
+   background-size: 100% 100%;
+}
+.tank
+{
+   font-family: "Courier New";
+   font-weight: bold;
+   font-size: 16px;
+   text-decoration: none;
+   color: #000000;
+   --color: #000000;
+   background-color: transparent;
+}
+.scale1
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: scale-my;
+   animation-duration: 100ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.scale2
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: scale-my2;
+   animation-duration: 100ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.selected_naiton
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: scale-my2-stop;
+   animation-duration: 100ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: 1;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.strelka_udlinyalka
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: strelka_udlinyalka;
+   animation-duration: 750ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+   animation-fill-mode: forwards;
+}
+.strelka_udlinyalka_pause
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: strelka_udlinyalka-pause;
+   animation-duration: 500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
+}
+.darktheme .strelka_udlinyalka_pause
+{
+}
+.strelka_udlinyaika_infinite
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: strelka_udlinyalka-infinite;
+   animation-duration: 1500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.strelka_udlinyalka_polosa
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: strelka_udlinyalka-polosa;
+   animation-duration: 750ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+   animation-fill-mode: forwards;
+}
+.red_bottom
+{
+   text-decoration: none;
+   background-color: transparent;
+   background-image: url('images/red_bottom.png');
+   background-size: 100% 100%;
+}
+.white_bottom
+{
+   text-decoration: none;
+   background-color: transparent;
+   background-image: url('images/white_bottom.png');
+   background-size: 100% 100%;
+}
+.ugolok_posle_strelki
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: ugolok_posle_strelki;
+   animation-duration: 500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
+}
+.polosa_vniz
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: polosa_vniz;
+   animation-duration: 500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
+}
+.siyaka
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: siyaka_kraya;
+   animation-duration: 2000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
+}
