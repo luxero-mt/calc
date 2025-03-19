@@ -558,16 +558,6 @@ const tankData = [
 let selectedTanks = [];
 let activePopup = null;
 
-function test(...args){
-    console.log(args)
-    /*console.log(tankData);
-    tankData.forEach(t => {
-        const img = document.getElementById(t.id);
-        if(img)        img.style.background = 'red';
-        else console.error(t)
-    })*/
-}
-
 function onSelect(e) {
     const el = e.srcElement;
     if(!el)return;
@@ -697,6 +687,7 @@ function showPath(path, targetElement) {
     // Отображаем текст во всплывающем окне
     
     document.querySelector('#pathDetails').innerHTML = html;
+    document.querySelector('#pathDetails').className = '';
     showPopup('successPopup', targetElement);
 }
 
