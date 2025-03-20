@@ -3,41 +3,49 @@
 <head>
 <meta charset="utf-8">
 <title>Калькулятор прокачки. Техника СССР.</title>
+<meta name="keywords" content="мир танков, калькулятор прокачки">
+<meta name="robots" content="index, follow">
+<meta name="revisit-after" content="1 day">
 <meta name="generator" content="WYSIWYG Web Builder 19 - https://www.wysiwygwebbuilder.com">
 <link href="calc_new.css" rel="stylesheet">
 <link href="index.css" rel="stylesheet">
 <script src="jquery-3.7.1.min.js"></script>
 <script src="wwb19.min.js"></script>
 <style>
-       /* Стили всплывающих окон */
+ /* Стили всплывающих окон */
         .custom-popup {
             position: absolute;
             display: none;
             z-index: 9999;
             min-width: 150px;
             max-width: 250px;
-            background: #d1f7ac;
-            border: 2px solid #423568;
+            background: #e5e5e5;
+            border: 2px solid #000;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
             padding: 10px;
-            font-family: Liberation Sans Narrow;
-            font-size: 13px;
+            font-family: MOSCOW2024;
+            font-size: 11px;
             color: #000;
+            border-radius: 8px;
         }
 
         /* Заголовок окна */
-        .popup-header {
+           .popup-header {
             display: flex;
             justify-content: flex-end;
-            padding-bottom: 0px;
-        }
+            padding-bottom: 10px;
+            }
 
         /* Крестик закрытия */
-        .close-button {
+            .close-button {
             cursor: pointer;
-            font-size: 12px;
+            margin-left: 5px;
+            font-size: 20px;
             font-weight: bold;
             color: #000;
-            margin-left: 0px;
+            position: absolute;
+            right: 4px;
+            top: -4px;
         }
 
         .close-button:hover {
@@ -45,7 +53,7 @@
         }
 
         /* Стили для строк пути */
-        .path-row {
+            .path-row {
             display: flex;
             justify-content: space-between;
             margin: 5px 0;
@@ -60,12 +68,12 @@
         }
 
         .total-exp {
-            font-weight: bold;
+            font-weight: normal;
             margin-top: 10px;
             text-align: right;
         }
         /* Стиль для контейнера с "Итого" */
-.total-exp {
+    .total-exp {
     display: flex;
     justify-content: space-between; /* Размещает элементы по краям */
     align-items: center; /* Выравнивает элементы по вертикали */
@@ -73,15 +81,16 @@
 }
 
 /* Стиль для левой части ("Итого") */
-.total-label {
-    font-weight: bold; /* Жирный шрифт */
+    .total-label {
+    font-weight: normal; /* Жирный шрифт */
+    color: #ce0808; /* Цвет текста */
     text-align: left; /* Выравнивание по левому краю */
 }
 
 /* Стиль для правой части (результата) */
-.total-value {
-    font-weight: bold; /* Жирный шрифт */
-    color: #000000; /* Цвет текста */
+    .total-value {
+    font-weight: normal; /* Жирный шрифт */
+    color: #ce0808; /* Цвет текста */
     text-align: right; /* Выравнивание по правому краю */
 }
 
@@ -125,6 +134,7 @@
     </div>
     <p>Ошибка: Танки из разных веток!</p>
 </div>
+
 <div id="wb_strelka_06" style="position:absolute;left:430px;top:247px;width:36px;height:30px;z-index:0;">
 <img src="images/future.png" id="strelka_06" alt="" class="strelka_udlinyalka_pause" width="36" height="93"></div>
 <div id="wb_strelka_07" style="position:absolute;left:430px;top:427px;width:36px;height:30px;z-index:1;">
@@ -380,15 +390,15 @@
 <div id="wb_t-6-2-ar-01" style="position:absolute;left:550px;top:290px;width:85px;height:48px;z-index:126;">
 <a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su-122_hover', 1);AnimateCss('wb_t-6-2-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su-122_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu-122', 'scale-my-classes', 0, 100);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka_15','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_su-122_hover', 0);AnimateCss('wb_t-6-2-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su-122_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu-122', 'scale-my2-classes', 0, 100);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka_15','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R163_SU_122.png" id="t-6-2-ar-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-5-2_3_4-pt-01" style="position:absolute;left:450px;top:410px;width:85px;height:48px;z-index:127;">
-<img src="images/ussr-R02_SU-85.png" id="t-5-2_3_4-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su-85_hover', 1);AnimateCss('wb_t-5-2_3_4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su-85_hover', 'scale-my-classes', 0, 100);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_su-85_hover', 0);AnimateCss('wb_t-5-2_3_4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su-85_hover', 'scale-my2-classes', 0, 100);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R02_SU-85.png" id="t-5-2_3_4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-4-1_2_3_4-pt-01" style="position:absolute;left:350px;top:410px;width:85px;height:48px;z-index:128;">
 <a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su-76m_hover', 1);AnimateCss('wb_t-4-1_2_3_4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su-76m_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu76m', 'scale-my-classes', 0, 100);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_su-76m_hover', 0);AnimateCss('wb_t-4-1_2_3_4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su-76m_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu76m', 'scale-my2-classes', 0, 100);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R24_SU-76.png" id="t-4-1_2_3_4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-3-1_2_3_4-lt-01" style="position:absolute;left:250px;top:410px;width:85px;height:48px;z-index:129;">
 <a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_t-70_hover', 1);AnimateCss('wb_t-3-1_2_3_4-lt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_t-70_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clt-70', 'scale-my-classes', 0, 100);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_t-70_hover', 0);AnimateCss('wb_t-3-1_2_3_4-lt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_t-70_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clt-70', 'scale-my2-classes', 0, 100);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R43_T-70.png" id="t-3-1_2_3_4-lt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-2-1_2_3_4-lt-01" style="position:absolute;left:150px;top:410px;width:85px;height:48px;z-index:130;">
 <a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_t-60_hover', 1);AnimateCss('wb_t-2-1_2_3_4-lt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_t-60_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clt-60', 'scale-my-classes', 0, 100);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_t-60_hover', 0);AnimateCss('wb_t-2-1_2_3_4-lt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_t-60_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clt-60', 'scale-my2-classes', 0, 100);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R42_T-60.png" id="t-2-1_2_3_4-lt-01" alt="" class="tank" width="85" height="48"></a></div>
-<div id="wb_t-1-1_2_2_3_4_5_6_7_8-lt-01" style="position:absolute;left:50px;top:470px;width:85px;height:48px;z-index:131;">
-<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_ms-1_hover', 1);AnimateCss('wb_t-1-2_2_3_4_5_6_7_8-lt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_ms-1_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clms-1', 'scale-my-classes', 0, 100);return false;" onmouseout="ShowObject('wb_ms-1_hover', 0);AnimateCss('wb_t-1-2_2_3_4_5_6_7_8-lt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_ms-1_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clms-1', 'scale-my2-classes', 0, 100);return false;"><img src="images/ussr-R11_MS-1.png" id="t-1-1_2_3_4_5_6_7_8-lt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-1-1_2_3_4_5_6_7_8-lt-01" style="position:absolute;left:50px;top:470px;width:85px;height:48px;z-index:131;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_ms-1_hover', 1);AnimateCss('wb_t-1-1_2_3_4_5_6_7_8-lt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_ms-1_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clms-1', 'scale-my-classes', 0, 100);return false;" onmouseout="ShowObject('wb_ms-1_hover', 0);AnimateCss('wb_t-1-1_2_3_4_5_6_7_8-lt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_ms-1_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clms-1', 'scale-my2-classes', 0, 100);return false;"><img src="images/ussr-R11_MS-1.png" id="t-1-1_2_3_4_5_6_7_8-lt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_Text2" style="position:absolute;left:228px;top:636px;width:695px;height:33px;text-align:center;z-index:132;">
 <span style="color:#000000;font-family:MOSCOW2024;font-size:29px;"><strong>Сайт в разработке</strong></span></div>
 <div id="wb_Image1" style="position:absolute;left:744px;top:602px;width:100px;height:100px;z-index:133;">
@@ -396,27 +406,29 @@
 <div id="wb_ugolok_kms1" style="position:absolute;left:116px;top:428px;width:36px;height:30px;z-index:134;">
 <img src="images/future.png" id="ugolok_kms1" alt="" class="ugolok_posle_strelki" width="36" height="93"></div>
 <div id="wb_t-10-3-pt-01" style="position:absolute;left:950px;top:350px;width:85px;height:48px;z-index:135;">
-<img src="images/ussr-R149_Object_268_4.png" id="t-10-3-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_268-4_hover', 1);AnimateCss('wb_t-10-3-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_268-4_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl268-4', 'scale-my-classes', 0, 100);ShowObject('wb_263_hover', 1);ShowObject('wb_su101_hover', 1);ShowObject('wb_su100m1_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka_16','strelka_udlinyalka');SetClass('#strelka_17','strelka_udlinyalka');SetClass('#strelka_18','strelka_udlinyalka');SetClass('#strelka_19','strelka_udlinyalka');SetClass('#strelka24','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_268-4_hover', 0);AnimateCss('wb_t-10-3-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_268-4_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl268-4', 'scale-my2-classes', 0, 100);ShowObject('wb_263_hover', 0);ShowObject('wb_su101_hover', 0);ShowObject('wb_su100m1_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka_16','strelka_udlinyalka_pause');SetClass('#strelka_17','strelka_udlinyalka_pause');SetClass('#strelka_18','strelka_udlinyalka_pause');SetClass('#strelka_19','strelka_udlinyalka_pause');SetClass('#strelka24','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R149_Object_268_4.png" id="t-10-3-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-9-3-pt-01" style="position:absolute;left:850px;top:350px;width:85px;height:48px;z-index:136;">
-<img src="images/ussr-R93_Object263.png" id="t-9-3-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_263_hover', 1);AnimateCss('wb_t-9-3-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_263_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl263', 'scale-my-classes', 0, 100);ShowObject('wb_su101_hover', 1);ShowObject('wb_su100m1_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka_17','strelka_udlinyalka');SetClass('#strelka_18','strelka_udlinyalka');SetClass('#strelka_19','strelka_udlinyalka');SetClass('#strelka24','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_263_hover', 0);AnimateCss('wb_t-9-3-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_263_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl263', 'scale-my2-classes', 0, 100);ShowObject('wb_su101_hover', 0);ShowObject('wb_su100m1_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka_17','strelka_udlinyalka_pause');SetClass('#strelka_18','strelka_udlinyalka_pause');SetClass('#strelka_19','strelka_udlinyalka_pause');SetClass('#strelka24','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R93_Object263.png" id="t-9-3-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-8-3-pt-01" style="position:absolute;left:750px;top:350px;width:85px;height:48px;z-index:137;">
-<img src="images/ussr-R58_SU-101.png" id="t-8-3-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su101_hover', 1);AnimateCss('wb_t-8-3-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su101_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu101', 'scale-my-classes', 0, 100);ShowObject('wb_su100m1_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka_18','strelka_udlinyalka');SetClass('#strelka_19','strelka_udlinyalka');SetClass('#strelka24','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_su101_hover', 0);AnimateCss('wb_t-8-3-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su101_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu101', 'scale-my2-classes', 0, 100);ShowObject('wb_su100m1_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka_18','strelka_udlinyalka_pause');SetClass('#strelka_19','strelka_udlinyalka_pause');SetClass('#strelka24','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R58_SU-101.png" id="t-8-3-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-7-3-pt-01" style="position:absolute;left:650px;top:350px;width:85px;height:48px;z-index:138;">
-<img src="images/ussr-R74_SU100M1.png" id="t-7-3-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su100m1_hover', 1);AnimateCss('wb_t-7-3-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su100m1_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu100m1', 'scale-my-classes', 0, 100);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka_19','strelka_udlinyalka');SetClass('#strelka24','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_su100m1_hover', 0);AnimateCss('wb_t-7-3-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su100m1_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu100m1', 'scale-my2-classes', 0, 100);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka_19','strelka_udlinyalka_pause');SetClass('#strelka24','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R74_SU100M1.png" id="t-7-3-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-10-4-pt-01" style="position:absolute;left:950px;top:410px;width:85px;height:48px;z-index:139;">
-<img src="images/ussr-R88_Object268.png" id="t-10-4-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_268_hover', 1);AnimateCss('wb_t-10-4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_268_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl268', 'scale-my-classes', 0, 100);ShowObject('wb_704_hover', 1);ShowObject('wb_isu152_hover', 1);ShowObject('wb_su152_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka20','strelka_udlinyalka');SetClass('#strelka21','strelka_udlinyalka');SetClass('#strelka22','strelka_udlinyalka');SetClass('#strelka23','strelka_udlinyalka');SetClass('#strelka24','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_268_hover', 0);AnimateCss('wb_t-10-4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_268_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl268', 'scale-my2-classes', 0, 100);ShowObject('wb_704_hover', 0);ShowObject('wb_isu152_hover', 0);ShowObject('wb_su152_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka20','strelka_udlinyalka_pause');SetClass('#strelka21','strelka_udlinyalka_pause');SetClass('#strelka22','strelka_udlinyalka_pause');SetClass('#strelka23','strelka_udlinyalka_pause');SetClass('#strelka24','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R88_Object268.png" id="t-10-4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-9-4-pt-01" style="position:absolute;left:850px;top:410px;width:85px;height:48px;z-index:140;">
-<img src="images/ussr-R53_Object_704.png" id="t-9-4-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_704_hover', 1);AnimateCss('wb_t-9-4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_704_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl704', 'scale-my-classes', 0, 100);ShowObject('wb_isu152_hover', 1);ShowObject('wb_su152_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka21','strelka_udlinyalka');SetClass('#strelka22','strelka_udlinyalka');SetClass('#strelka23','strelka_udlinyalka');SetClass('#strelka24','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_704_hover', 0);AnimateCss('wb_t-9-4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_704_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl704', 'scale-my2-classes', 0, 100);ShowObject('wb_isu152_hover', 0);ShowObject('wb_su152_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka21','strelka_udlinyalka_pause');SetClass('#strelka22','strelka_udlinyalka_pause');SetClass('#strelka23','strelka_udlinyalka_pause');SetClass('#strelka24','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R53_Object_704.png" id="t-9-4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-8-4-pt-01" style="position:absolute;left:750px;top:410px;width:85px;height:48px;z-index:141;">
-<img src="images/ussr-R47_ISU-152.png" id="t-8-4-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_isu152_hover', 1);AnimateCss('wb_t-8-4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_isu152_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clisy152', 'scale-my-classes', 0, 100);ShowObject('wb_su152_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka22','strelka_udlinyalka');SetClass('#strelka23','strelka_udlinyalka');SetClass('#strelka24','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_isu152_hover', 0);AnimateCss('wb_t-8-4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_isu152_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clisy152', 'scale-my2-classes', 0, 100);ShowObject('wb_su152_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka22','strelka_udlinyalka_pause');SetClass('#strelka23','strelka_udlinyalka_pause');SetClass('#strelka24','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R47_ISU-152.png" id="t-8-4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-7-4-pt-01" style="position:absolute;left:650px;top:410px;width:85px;height:48px;z-index:142;">
-<img src="images/ussr-R18_SU-152.png" id="t-7-4-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su152_hover', 1);AnimateCss('wb_t-7-4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su152_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu152', 'scale-my-classes', 0, 100);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka23','strelka_udlinyalka');SetClass('#strelka24','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_su152_hover', 0);AnimateCss('wb_t-7-4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su152_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu152', 'scale-my2-classes', 0, 100);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka23','strelka_udlinyalka_pause');SetClass('#strelka24','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R18_SU-152.png" id="t-7-4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_t-6-3_4-pt-01" style="position:absolute;left:550px;top:410px;width:85px;height:48px;z-index:143;">
-<img src="images/ussr-R17_SU-100.png" id="t-6-3_4-pt-01" alt="" class="tank" width="85" height="48"></div>
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su100_hover', 1);AnimateCss('wb_t-6-3_4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su100_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu100', 'scale-my-classes', 0, 100);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#strelka24','strelka_udlinyalka');SetClass('#strelka_07','strelka_udlinyalka');SetClass('#strelka_08','strelka_udlinyalka');SetClass('#strelka_09','strelka_udlinyalka');SetClass('#strelka_10','strelka_udlinyalka');return false;" onmouseout="ShowObject('wb_su100_hover', 0);AnimateCss('wb_t-6-3_4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su100_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu100', 'scale-my2-classes', 0, 100);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#strelka24','strelka_udlinyalka_pause');SetClass('#strelka_07','strelka_udlinyalka_pause');SetClass('#strelka_08','strelka_udlinyalka_pause');SetClass('#strelka_09','strelka_udlinyalka_pause');SetClass('#strelka_10','strelka_udlinyalka_pause');return false;"><img src="images/ussr-R17_SU-100.png" id="t-6-3_4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
 <div id="wb_ugolok_shturmsau" style="position:absolute;left:516px;top:308px;width:36px;height:30px;z-index:144;">
 <img src="images/future.png" id="ugolok_shturmsau" alt="" class="ugolok_posle_strelki" width="36" height="93"></div>
-<div id="wb_Text3" style="position:absolute;left:28px;top:133px;width:114px;height:36px;text-align:center;z-index:145;">
-<span style="color:#000000;font-family:MOSCOW2024;font-size:16px;">ТЕХНИКА<br>СССР</span></div>
+<div id="wb_Text3" style="position:absolute;left:28px;top:133px;width:114px;height:54px;text-align:center;z-index:145;">
+<span style="color:#000000;font-family:MOSCOW2024;font-size:16px;">ТЕХНИКА<br>СССР<br></span></div>
+<div id="wb_orbita1" style="position:absolute;left:505px;top:350px;width:26px;height:28px;z-index:146;">
+<img src="images/orbita.png" id="orbita1" alt="" width="26" height="28"></div>
 <script>
 // Массив данных о танках
 const tankData = [
@@ -552,6 +564,82 @@ const tankData = [
         branches: [1, 2, 3, 4, 5, 6, 7, 8],
         minExp: 0, 
         maxExp: 0 
+    },
+      { 
+        id: "t-10-3-pt-01", 
+        name: "Об. 268/4", 
+        level: 10, 
+        branches: [3], 
+        minExp: 337000, 
+        maxExp: 323300 
+    },
+      { 
+        id: "t-9-3-pt-01", 
+        name: "Об. 263", 
+        level: 9, 
+        branches: [3], 
+        minExp: 217500, 
+        maxExp: 242615 
+    },
+    { 
+        id: "t-8-3-pt-01", 
+        name: "СУ-101", 
+        level: 8, 
+        branches: [3], 
+        minExp: 135665, 
+        maxExp: 216965 
+    },
+    
+    
+    { 
+        id: "t-7-3-pt-01", 
+        name: "СУ-100М1", 
+        level: 7, 
+        branches: [3], 
+        minExp: 68800, 
+        maxExp: 73950 
+    },
+      { 
+        id: "t-10-4-pt-01", 
+        name: "Об. 268", 
+        level: 10, 
+        branches: [4], 
+        minExp: 337000, 
+        maxExp: 323300 
+    },
+      { 
+        id: "t-9-4-pt-01", 
+        name: "Об. 704", 
+        level: 9, 
+        branches: [4], 
+        minExp: 217500, 
+        maxExp: 242615 
+    },
+    { 
+        id: "t-8-4-pt-01", 
+        name: "ИСУ-152", 
+        level: 8, 
+        branches: [4], 
+        minExp: 135665, 
+        maxExp: 216965 
+    },
+    
+    
+    { 
+        id: "t-7-4-pt-01", 
+        name: "СУ-152", 
+        level: 7, 
+        branches: [4], 
+        minExp: 68800, 
+        maxExp: 73950 
+    },
+      { 
+        id: "t-6-3_4-pt-01", 
+        name: "СУ-100", 
+        level: 6, 
+        branches: [3, 4], 
+        minExp: 36200, 
+        maxExp: 42950 
     }
 ];
 
@@ -650,7 +738,7 @@ function showPath(path, targetElement) {
     let totalMaxExp = 0;
 
     // Минимальные затраты
-    let html = '<div><strong>Минимальное количество<br> опыта для исследования:</strong><br>';
+    let html = '<div>Минимальное количество<br> опыта для исследования:<br><hr>';
     path.forEach(tank => {
         html += `<div class="path-row">
             <span class="tank-name">${tank.name}</span>
@@ -667,7 +755,7 @@ function showPath(path, targetElement) {
         </div></div>
     `;
 
-    html += '<hr><div><strong>Максимальное количество<br> опыта для исследования:</strong><br>';
+    html += '<hr><div>Максимальное количество<br> опыта для исследования:<br><hr>';
     path.forEach(tank => {
         html += `<div class="path-row">
             <span class="tank-name">${tank.name}</span>
@@ -721,8 +809,8 @@ function showError(errorType, targetElement) {
 // Позиционирование окна под старшим танком
 function positionPopup(popup, target) {
     const rect = target.getBoundingClientRect();
-    const top = rect.bottom + window.scrollY + 25; // 25px снизу
-    const left = rect.left + window.scrollX; // Выравниваем левый край
+    const top = rect.bottom + window.scrollY + 7; // 7px снизу
+    const left = rect.left + window.scrollX - 1; // Выравниваем левый край
     
     popup.style.top = `${top}px`;
     popup.style.left = `${left}px`;
@@ -745,7 +833,6 @@ function closePopup(popupId) {
     shadow.style.display='none';
     resetSelection();
 }
-
 </script>
 </body>
 </html>

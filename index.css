@@ -1722,11 +1722,11 @@ body
    width: 100%;
    height: 100%;
 }
-#wb_t10-2-ar-01
+#wb_t-10-2-ar-01
 {
    vertical-align: top;
 }
-#t10-2-ar-01
+#t-10-2-ar-01
 {
    padding: 0;
    margin: 0;
@@ -1918,11 +1918,11 @@ body
    width: 100%;
    height: 100%;
 }
-#wb_t-1-2_2_3_4_5_6_7_8-lt-01
+#wb_t-1-1_2_3_4_5_6_7_8-lt-01
 {
    vertical-align: top;
 }
-#t-1-2_2_3_4_5_6_7_8-lt-01
+#t-1-1_2_3_4_5_6_7_8-lt-01
 {
    padding: 0;
    margin: 0;
@@ -2112,8 +2112,24 @@ body
    padding: 0;
    margin: 0;
    text-align: center;
+   animation: ;
 }
 #wb_Text3 div
 {
    text-align: center;
+}
+#wb_orbita1
+{
+   vertical-align: top;
+}
+#orbita1
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
 }
