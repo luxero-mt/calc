@@ -6,74 +6,68 @@
 <meta name="keywords" content="мир танков, калькулятор прокачки">
 <meta name="robots" content="index, follow">
 <meta name="revisit-after" content="1 day">
-<meta name="generator" content="WYSIWYG Web Builder 19 - https://www.wysiwygwebbuilder.com">
 <link href="calc_new.css" rel="stylesheet">
 <link href="index.css" rel="stylesheet">
 <script src="jquery-3.7.1.min.js"></script>
 <script src="wwb19.min.js"></script>
 <style>
- /* Стили всплывающих окон */
-        .custom-popup {
-            position: absolute;
-            display: none;
-            z-index: 9999;
-            min-width: 150px;
-            max-width: 250px;
-            background: #e5e5e5;
-            border: 2px solid #000;
-            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            padding: 10px;
-            font-family: MOSCOW2024;
-            font-size: 11px;
-            color: #000;
-            border-radius: 8px;
-        }
+/* Стили всплывающих окон */
+.custom-popup {
+    position: absolute;
+    display: none;
+    z-index: 9999;
+    min-width: 150px;
+    max-width: 250px;
+    background: #e5e5e5;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    font-family: MOSCOW2024;
+    font-size: 11px;
+    color: #000;
+    border-radius: 8px;
+}
 
-        /* Заголовок окна */
-           .popup-header {
-            display: flex;
-            justify-content: flex-end;
-            padding-bottom: 10px;
-            }
+/* Заголовок окна */
+.popup-header {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 15px;
+}
 
-        /* Крестик закрытия */
-            .close-button {
-            cursor: pointer;
-            margin-left: 5px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #000;
-            position: absolute;
-            right: 4px;
-            top: -4px;
-        }
+/* Крестик закрытия */
+.close-button {
+    cursor: pointer;
+    margin-left: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    position: absolute;
+    right: 7px;
+    top: -5px;
+}
 
-        .close-button:hover {
-            color: #000;
-        }
+.close-button:hover {
+    color: #000;
+}
 
-        /* Стили для строк пути */
-            .path-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
-        }
+/* Стили для строк пути */
+.path-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
 
-        .tank-name {
-            font-weight: normal;
-        }
+.tank-name {
+    font-weight: normal;
+}
 
-        .exp-value {
-            color: #000000;
-        }
+.exp-value {
+    color: #000000;
+}
 
-        .total-exp {
-            font-weight: normal;
-            margin-top: 10px;
-            text-align: right;
-        }
-        /* Стиль для контейнера с "Итого" */
-    .total-exp {
+/* Стиль для контейнера с "Итого" */
+.total-exp {
     display: flex;
     justify-content: space-between; /* Размещает элементы по краям */
     align-items: center; /* Выравнивает элементы по вертикали */
@@ -81,46 +75,53 @@
 }
 
 /* Стиль для левой части ("Итого") */
-    .total-label {
+.total-label {
     font-weight: normal; /* Жирный шрифт */
     color: #ce0808; /* Цвет текста */
     text-align: left; /* Выравнивание по левому краю */
 }
 
 /* Стиль для правой части (результата) */
-    .total-value {
+.total-value {
     font-weight: normal; /* Жирный шрифт */
     color: #ce0808; /* Цвет текста */
     text-align: right; /* Выравнивание по правому краю */
 }
 
+/* Тень для фона */
 #shadow {
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     right: 0;
     bottom: 0;
     display: none;
     z-index: 9999;
 }
+
+/* Стили для отображения содержимого #pathDetails */
 #pathDetails > * {
     display: none;
 }
+
 #pathDetails > *:first-child {
     display: block;
 }
+
 #pathDetails.second > *:first-child {
     display: none;
 }
+
 #pathDetails.second > *:last-child {
     display: block;
 }
 
-    </style>
+</style>
 </head>
 <body>
 <!-- Всплывающие окна -->
- <div id="shadow" onclick="closePopup()"></div>
+<div id="shadow" onclick="closePopup()"></div>
+
 <div id="successPopup" class="custom-popup">
     <div class="popup-header">
         <span class="close-button" onclick="closePopup('successPopup')">&times;</span>
@@ -648,25 +649,25 @@ let activePopup = null;
 
 function onSelect(e) {
     const el = e.srcElement;
-    if(!el)return;
+    if (!el) return;
+
     el.classList.toggle('selected-tank');
     checkSelectedTanks();
     return false;
 }
 
 // Функция для добавления класса
-function SetClass(selector, className) {
+function setClass(selector, className) {
     const element = document.querySelector(selector);
     if (element && className && className.trim() !== "") {
         element.className = className; // Устанавливаем только один класс
     }
 }
 
-
 // Функция проверки выбранных танков
 function checkSelectedTanks() {
     const tanks = document.querySelectorAll('.selected-tank');
-    
+
     if (tanks.length < 2) return;
     if (tanks.length > 2) {
         resetSelection();
@@ -708,7 +709,6 @@ function parseId(id) {
     ];
 }
 
-
 // Функция получения пути
 function getPath(startTankId, endTankId) {
     const startTank = tankData.find(tank => tank.id === startTankId);
@@ -731,7 +731,6 @@ function getPath(startTankId, endTankId) {
     return branchTanks.sort((a, b) => a.level - b.level);
 }
 
-
 // Функция отображения пути
 function showPath(path, targetElement) {
     let totalMinExp = 0;
@@ -740,10 +739,12 @@ function showPath(path, targetElement) {
     // Минимальные затраты
     let html = '<div>Минимальное количество<br> опыта для исследования:<br><hr>';
     path.forEach(tank => {
-        html += `<div class="path-row">
-            <span class="tank-name">${tank.name}</span>
-            <span class="exp-value">${tank.minExp.toLocaleString()} опыта</span>
-        </div>`;
+        html += `
+            <div class="path-row">
+                <span class="tank-name">${tank.name}</span>
+                <span class="exp-value">${tank.minExp.toLocaleString()} ☆</span>
+            </div>
+        `;
         totalMinExp += tank.minExp;
     });
 
@@ -751,16 +752,18 @@ function showPath(path, targetElement) {
     html += `
         <div class="total-exp">
             <span class="total-label">Итого:</span>
-            <span class="total-value">${totalMinExp.toLocaleString()} опыта</span>
-        </div></div>
-    `;
+            <span class="total-value">${totalMinExp.toLocaleString()} ☆</span>
+        </div>
+    </div>`;
 
     html += '<hr><div>Максимальное количество<br> опыта для исследования:<br><hr>';
     path.forEach(tank => {
-        html += `<div class="path-row">
-            <span class="tank-name">${tank.name}</span>
-            <span class="exp-value">${tank.maxExp.toLocaleString()} опыта</span>
-        </div>`;
+        html += `
+            <div class="path-row">
+                <span class="tank-name">${tank.name}</span>
+                <span class="exp-value">${tank.maxExp.toLocaleString()} ☆</span>
+            </div>
+        `;
         totalMaxExp += tank.maxExp;
     });
 
@@ -768,12 +771,11 @@ function showPath(path, targetElement) {
     html += `
         <div class="total-exp">
             <span class="total-label">Итого:</span>
-            <span class="total-value">${totalMaxExp.toLocaleString()} опыта</span>
-        </div></div>
-    `;
+            <span class="total-value">${totalMaxExp.toLocaleString()} ☆</span>
+        </div>
+    </div>`;
 
     // Отображаем текст во всплывающем окне
-    
     document.querySelector('#pathDetails').innerHTML = html;
     document.querySelector('#pathDetails').className = '';
     showPopup('successPopup', targetElement);
@@ -781,7 +783,7 @@ function showPath(path, targetElement) {
 
 function togglePan() {
     const el = document.querySelector('#pathDetails');
-    if(el.className.includes('second')) {
+    if (el.className.includes('second')) {
         closePopup();
         return false;
     }
@@ -792,6 +794,7 @@ function togglePan() {
 function showPopup(popupId, targetElement) {
     const shadow = document.getElementById('shadow');
     shadow.style.display = 'block';
+
     const popup = document.getElementById(popupId);
     positionPopup(popup, targetElement);
     popup.style.display = 'block';
@@ -803,7 +806,7 @@ function showPopup(popupId, targetElement) {
 
 // Функция отображения ошибок
 function showError(errorType, targetElement) {
-    showPopup(errorType, targetElement);    
+    showPopup(errorType, targetElement);
 }
 
 // Позиционирование окна под старшим танком
@@ -811,14 +814,14 @@ function positionPopup(popup, target) {
     const rect = target.getBoundingClientRect();
     const top = rect.bottom + window.scrollY + 7; // 7px снизу
     const left = rect.left + window.scrollX - 1; // Выравниваем левый край
-    
+
     popup.style.top = `${top}px`;
     popup.style.left = `${left}px`;
 }
 
 // Сброс выбора
 function resetSelection() {
-    document.querySelectorAll('.selected-tank').forEach(tank => 
+    document.querySelectorAll('.selected-tank').forEach(tank =>
         tank.classList.remove('selected-tank')
     );
     selectedTanks = [];
@@ -829,8 +832,9 @@ function resetSelection() {
 function closePopup(popupId) {
     const popup = popupId ? document.getElementById(popupId) : activePopup;
     const shadow = document.getElementById('shadow');
+
     popup.style.display = 'none';
-    shadow.style.display='none';
+    shadow.style.display = 'none';
     resetSelection();
 }
 </script>
