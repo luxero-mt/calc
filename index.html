@@ -116,7 +116,17 @@
     display: block;
 }
 
-</style>
+    .exp-value::after {
+    content: url('images/zvezda.png');
+    display: inline-block;
+    margin-left: 7px;
+    }
+   .total-value::after {
+    content: url('images/zvezda_red.png');
+    display: inline-block;
+    margin-left: 7px;
+        }
+  </style>
 </head>
 <body>
 <!-- Всплывающие окна -->
@@ -742,7 +752,7 @@ function showPath(path, targetElement) {
         html += `
             <div class="path-row">
                 <span class="tank-name">${tank.name}</span>
-                <span class="exp-value">${tank.minExp.toLocaleString()} ☆</span>
+                <span class="exp-value">${tank.minExp.toLocaleString()}</span>
             </div>
         `;
         totalMinExp += tank.minExp;
@@ -752,16 +762,16 @@ function showPath(path, targetElement) {
     html += `
         <div class="total-exp">
             <span class="total-label">Итого:</span>
-            <span class="total-value">${totalMinExp.toLocaleString()} ☆</span>
+            <span class="total-value">${totalMinExp.toLocaleString()}</span>
         </div>
     </div>`;
 
-    html += '<hr><div>Максимальное количество<br> опыта для исследования:<br><hr>';
+    html += '<div>Максимальное количество<br> опыта для исследования:<br><hr>';
     path.forEach(tank => {
         html += `
             <div class="path-row">
                 <span class="tank-name">${tank.name}</span>
-                <span class="exp-value">${tank.maxExp.toLocaleString()} ☆</span>
+                <span class="exp-value">${tank.maxExp.toLocaleString()}</span>
             </div>
         `;
         totalMaxExp += tank.maxExp;
@@ -771,7 +781,7 @@ function showPath(path, targetElement) {
     html += `
         <div class="total-exp">
             <span class="total-label">Итого:</span>
-            <span class="total-value">${totalMaxExp.toLocaleString()} ☆</span>
+            <span class="total-value">${totalMaxExp.toLocaleString()}</span>
         </div>
     </div>`;
 
