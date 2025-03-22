@@ -1,0 +1,852 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Калькулятор прокачки. Техника СССР.</title>
+<meta name="keywords" content="мир танков, калькулятор прокачки">
+<meta name="robots" content="index, follow">
+<meta name="revisit-after" content="1 day">
+<link href="calc.css" rel="stylesheet">
+<link href="index1.css" rel="stylesheet">
+<script src="jquery-3.7.1.min.js"></script>
+<script src="wwb19.min.js"></script>
+<style>
+/* Стили всплывающих окон */
+.custom-popup {
+    position: absolute;
+    display: none;
+    z-index: 9999;
+    min-width: 150px;
+    max-width: 250px;
+    background: #e5e5e5;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    font-family: MOSCOW2024;
+    font-size: 11px;
+    color: #000;
+    border-radius: 8px;
+}
+
+/* Заголовок окна */
+.popup-header {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 15px;
+}
+
+/* Крестик закрытия */
+.close-button {
+    cursor: pointer;
+    margin-left: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    position: absolute;
+    right: 7px;
+    top: -5px;
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+/* Стили для строк пути */
+.path-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.tank-name {
+    font-weight: normal;
+}
+
+.exp-value {
+    color: #000000;
+}
+
+/* Стиль для контейнера с "Итого" */
+.total-exp {
+    display: flex;
+    justify-content: space-between; /* Размещает элементы по краям */
+    align-items: center; /* Выравнивает элементы по вертикали */
+    margin-top: 10px;
+}
+
+/* Стиль для левой части ("Итого") */
+.total-label {
+    font-weight: normal; /* Жирный шрифт */
+    color: #ce0808; /* Цвет текста */
+    text-align: left; /* Выравнивание по левому краю */
+}
+
+/* Стиль для правой части (результата) */
+.total-value {
+    font-weight: normal; /* Жирный шрифт */
+    color: #ce0808; /* Цвет текста */
+    text-align: right; /* Выравнивание по правому краю */
+}
+
+/* Тень для фона */
+#shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    z-index: 9999;
+}
+
+/* Стили для отображения содержимого #pathDetails */
+#pathDetails > * {
+    display: none;
+}
+
+#pathDetails > *:first-child {
+    display: block;
+}
+
+#pathDetails.second > *:first-child {
+    display: none;
+}
+
+#pathDetails.second > *:last-child {
+    display: block;
+}
+
+    .exp-value::after {
+    content: url('images/zvezda.png');
+    display: inline-block;
+    margin-left: 7px;
+    }
+   .total-value::after {
+    content: url('images/zvezda_red.png');
+    display: inline-block;
+    margin-left: 7px;
+        }
+  </style>
+</head>
+<body>
+<!-- Всплывающие окна -->
+<div id="shadow" onclick="closePopup()"></div>
+
+<div id="successPopup" class="custom-popup">
+    <div class="popup-header">
+        <span class="close-button" onclick="closePopup('successPopup')">&times;</span>
+    </div>
+    <div id="pathDetails" onclick="togglePan()"></div>
+</div>
+
+<div id="errorDifferentBranch" class="custom-popup">
+    <div class="popup-header">
+        <span class="close-button" onclick="closePopup('errorDifferentBranch')">&times;</span>
+    </div>
+    <p>Ошибка: Танки из разных веток!</p>
+</div>
+<div id="wb_polosa24" style="position:absolute;left:630px;top:347px;width:36px;height:30px;z-index:0;">
+<img src="images/future.png" id="polosa24" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa23" style="position:absolute;left:730px;top:347px;width:36px;height:30px;z-index:1;">
+<img src="images/future.png" id="polosa23" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa22" style="position:absolute;left:830px;top:347px;width:36px;height:30px;z-index:2;">
+<img src="images/future.png" id="polosa22" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa21" style="position:absolute;left:930px;top:347px;width:36px;height:30px;z-index:3;">
+<img src="images/future.png" id="polosa21" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa20" style="position:absolute;left:530px;top:347px;width:36px;height:30px;z-index:4;">
+<img src="images/future.png" id="polosa20" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa17" style="position:absolute;left:830px;top:287px;width:36px;height:30px;z-index:5;">
+<img src="images/future.png" id="polosa17" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa18" style="position:absolute;left:730px;top:287px;width:36px;height:30px;z-index:6;">
+<img src="images/future.png" id="polosa18" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa19" style="position:absolute;left:630px;top:287px;width:36px;height:30px;z-index:7;">
+<img src="images/future.png" id="polosa19" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa16" style="position:absolute;left:930px;top:287px;width:36px;height:30px;z-index:8;">
+<img src="images/future.png" id="polosa16" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_ugolok_kms1" style="position:absolute;left:116px;top:347px;width:36px;height:30px;z-index:9;">
+<img src="images/future.png" id="ugolok_kms1" alt="" class="ugolok_posle_strelki" width="36" height="93"></div>
+<div id="wb_punktir10" style="position:absolute;left:941px;top:110px;width:3px;height:1400px;z-index:10;">
+<img src="images/punktir_dlinniy.png" id="punktir10" alt="" width="3" height="1400"></div>
+<div id="wb_punktir01" style="position:absolute;left:41px;top:110px;width:3px;height:1400px;z-index:11;">
+<img src="images/punktir_dlinniy.png" id="punktir01" alt="" width="3" height="1400"></div>
+<div id="wb_punktir02" style="position:absolute;left:141px;top:110px;width:3px;height:1400px;z-index:12;">
+<img src="images/punktir_dlinniy.png" id="punktir02" alt="" width="3" height="1400"></div>
+<div id="wb_punktir08" style="position:absolute;left:741px;top:110px;width:3px;height:1400px;z-index:13;">
+<img src="images/punktir_dlinniy.png" id="punktir08" alt="" width="3" height="1400"></div>
+<div id="wb_punktir06" style="position:absolute;left:541px;top:110px;width:3px;height:1400px;z-index:14;">
+<img src="images/punktir_dlinniy.png" id="punktir06" alt="" width="3" height="1400"></div>
+<div id="wb_punktir11" style="position:absolute;left:1041px;top:110px;width:3px;height:1400px;z-index:15;">
+<img src="images/punktir_dlinniy.png" id="punktir11" alt="" width="3" height="1400"></div>
+<div id="wb_punktir03" style="position:absolute;left:241px;top:110px;width:3px;height:1400px;z-index:16;">
+<img src="images/punktir_dlinniy.png" id="punktir03" alt="" width="3" height="1400"></div>
+<div id="wb_punktir04" style="position:absolute;left:341px;top:110px;width:3px;height:1400px;z-index:17;">
+<img src="images/punktir_dlinniy.png" id="punktir04" alt="" width="3" height="1400"></div>
+<div id="wb_punktir05" style="position:absolute;left:441px;top:110px;width:3px;height:1400px;z-index:18;">
+<img src="images/punktir_dlinniy.png" id="punktir05" alt="" width="3" height="1400"></div>
+<div id="wb_punktir07" style="position:absolute;left:641px;top:110px;width:3px;height:1400px;z-index:19;">
+<img src="images/punktir_dlinniy.png" id="punktir07" alt="" width="3" height="1400"></div>
+<div id="wb_punktir12" style="position:absolute;left:1141px;top:110px;width:3px;height:1400px;z-index:20;">
+<img src="images/punktir_dlinniy.png" id="punktir12" alt="" width="3" height="1400"></div>
+<div id="wb_punktir09" style="position:absolute;left:841px;top:110px;width:3px;height:1400px;z-index:21;">
+<img src="images/punktir_dlinniy.png" id="punktir09" alt="" width="3" height="1400"></div>
+<div id="wb_polosa15" style="position:absolute;left:430px;top:347px;width:36px;height:30px;z-index:22;">
+<img src="images/future.png" id="polosa15" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa10" style="position:absolute;left:930px;top:227px;width:36px;height:30px;z-index:23;">
+<img src="images/future.png" id="polosa10" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa11" style="position:absolute;left:830px;top:227px;width:36px;height:30px;z-index:24;">
+<img src="images/future.png" id="polosa11" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa12" style="position:absolute;left:730px;top:227px;width:36px;height:30px;z-index:25;">
+<img src="images/future.png" id="polosa12" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa13" style="position:absolute;left:630px;top:227px;width:36px;height:30px;z-index:26;">
+<img src="images/future.png" id="polosa13" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa14" style="position:absolute;left:530px;top:227px;width:36px;height:30px;z-index:27;">
+<img src="images/future.png" id="polosa14" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa_su100m1" style="position:absolute;left:616px;top:317px;width:36px;height:27px;z-index:28;">
+<img src="images/future.png" id="polosa_su100m1" alt="" class="polosa_vniz" width="36" height="93"></div>
+<div id="wb_ugolok_su100m1" style="position:absolute;left:616px;top:287px;width:36px;height:30px;z-index:29;">
+<img src="images/future.png" id="ugolok_su100m1" alt="" class="ugolok_posle_strelki" width="36" height="93"></div>
+<div id="wb_ugolok_shturmsau" style="position:absolute;left:516px;top:227px;width:36px;height:30px;z-index:30;">
+<img src="images/future.png" id="ugolok_shturmsau" alt="" class="ugolok_posle_strelki" width="36" height="93"></div>
+<div id="wb_polosa_shturmsau" style="position:absolute;left:516px;top:257px;width:36px;height:84px;z-index:31;">
+<img src="images/future.png" id="polosa_shturmsau" alt="" class="polosa_vniz" width="36" height="93"></div>
+<div id="wb_polosa9" style="position:absolute;left:130px;top:347px;width:36px;height:30px;z-index:32;">
+<img src="images/future.png" id="polosa9" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa8" style="position:absolute;left:230px;top:347px;width:36px;height:30px;z-index:33;">
+<img src="images/future.png" id="polosa8" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa7" style="position:absolute;left:330px;top:347px;width:36px;height:30px;z-index:34;">
+<img src="images/future.png" id="polosa7" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_orbita1" style="position:absolute;left:505px;top:270px;width:26px;height:28px;z-index:35;">
+<img src="images/orbita.png" id="orbita1" alt="" width="26" height="28"></div>
+<div id="wb_polosa4" style="position:absolute;left:627px;top:167px;width:36px;height:30px;z-index:36;">
+<img src="images/future.png" id="polosa4" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa5" style="position:absolute;left:530px;top:167px;width:36px;height:30px;z-index:37;">
+<img src="images/future.png" id="polosa5" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa6" style="position:absolute;left:430px;top:167px;width:36px;height:30px;z-index:38;">
+<img src="images/future.png" id="polosa6" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa3" style="position:absolute;left:730px;top:167px;width:36px;height:30px;z-index:39;">
+<img src="images/future.png" id="polosa3" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa2" style="position:absolute;left:830px;top:167px;width:36px;height:30px;z-index:40;">
+<img src="images/future.png" id="polosa2" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_polosa1" style="position:absolute;left:930px;top:167px;width:36px;height:30px;z-index:41;">
+<img src="images/future.png" id="polosa1" alt="" class="polosa_black" width="36" height="93"></div>
+<div id="wb_ugolok_arta" style="position:absolute;left:416px;top:167px;width:36px;height:30px;z-index:42;">
+<img src="images/future.png" id="ugolok_arta" alt="" class="ugolok_posle_strelki" width="36" height="93"></div>
+<div id="wb_clsu122a" style="position:absolute;left:450px;top:150px;width:85px;height:48px;z-index:43;">
+<img src="images/class_arta.png" id="clsu122a" alt="" width="91" height="51"></div>
+<div id="wb_su-122a_hover" style="position:absolute;left:450px;top:150px;width:85px;height:48px;visibility:hidden;z-index:44;">
+<img src="images/red_bottom.png" id="su-122a_hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu8" style="position:absolute;left:550px;top:150px;width:85px;height:48px;z-index:45;">
+<img src="images/class_arta.png" id="clsu8" alt="" width="91" height="51"></div>
+<div id="wb_su-8_hover" style="position:absolute;left:550px;top:150px;width:85px;height:48px;visibility:hidden;z-index:46;">
+<img src="images/red_bottom.png" id="su-8_hover" alt="" width="85" height="48"></div>
+<div id="wb_cls51" style="position:absolute;left:650px;top:150px;width:85px;height:48px;z-index:47;">
+<img src="images/class_arta.png" id="cls51" alt="" width="91" height="51"></div>
+<div id="wb_s-51_hover" style="position:absolute;left:650px;top:150px;width:85px;height:48px;visibility:hidden;z-index:48;">
+<img src="images/red_bottom.png" id="s-51_hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu14" style="position:absolute;left:750px;top:150px;width:85px;height:48px;z-index:49;">
+<img src="images/class_arta.png" id="clsu14" alt="" width="91" height="51"></div>
+<div id="wb_su14-hover" style="position:absolute;left:750px;top:150px;width:85px;height:48px;visibility:hidden;z-index:50;">
+<img src="images/red_bottom.png" id="su14-hover" alt="" width="85" height="48"></div>
+<div id="wb_cl212" style="position:absolute;left:850px;top:150px;width:85px;height:48px;z-index:51;">
+<img src="images/class_arta.png" id="cl212" alt="" width="91" height="51"></div>
+<div id="wb_212_hover" style="position:absolute;left:850px;top:150px;width:85px;height:48px;visibility:hidden;z-index:52;">
+<img src="images/red_bottom.png" id="212_hover" alt="" width="85" height="48"></div>
+<div id="wb_cl261" style="position:absolute;left:950px;top:150px;width:85px;height:48px;z-index:53;">
+<img src="images/class_arta.png" id="cl261" alt="" width="91" height="51"></div>
+<div id="wb_261hover" style="position:absolute;left:950px;top:150px;width:85px;height:48px;visibility:hidden;z-index:54;">
+<img src="images/red_bottom.png" id="261hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu100" style="position:absolute;left:550px;top:330px;width:85px;height:48px;z-index:55;">
+<img src="images/class_pt.png" id="clsu100" alt="" width="91" height="51"></div>
+<div id="wb_su100_hover" style="position:absolute;left:550px;top:330px;width:85px;height:48px;visibility:hidden;z-index:56;">
+<img src="images/red_bottom.png" id="su100_hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu152" style="position:absolute;left:650px;top:330px;width:85px;height:48px;z-index:57;">
+<img src="images/class_pt.png" id="clsu152" alt="" width="91" height="51"></div>
+<div id="wb_su152_hover" style="position:absolute;left:650px;top:330px;width:85px;height:48px;visibility:hidden;z-index:58;">
+<img src="images/red_bottom.png" id="su152_hover" alt="" width="85" height="48"></div>
+<div id="wb_clisy152" style="position:absolute;left:750px;top:330px;width:85px;height:48px;z-index:59;">
+<img src="images/class_pt.png" id="clisy152" alt="" width="91" height="51"></div>
+<div id="wb_isu152_hover" style="position:absolute;left:750px;top:330px;width:85px;height:48px;visibility:hidden;z-index:60;">
+<img src="images/red_bottom.png" id="isu152_hover" alt="" width="85" height="48"></div>
+<div id="wb_cl704" style="position:absolute;left:850px;top:330px;width:85px;height:48px;z-index:61;">
+<img src="images/class_pt.png" id="cl704" alt="" width="91" height="51"></div>
+<div id="wb_704_hover" style="position:absolute;left:850px;top:330px;width:85px;height:48px;visibility:hidden;z-index:62;">
+<img src="images/red_bottom.png" id="704_hover" alt="" width="85" height="48"></div>
+<div id="wb_cl268" style="position:absolute;left:950px;top:330px;width:85px;height:48px;z-index:63;">
+<img src="images/class_pt.png" id="cl268" alt="" width="91" height="51"></div>
+<div id="wb_268_hover" style="position:absolute;left:950px;top:330px;width:85px;height:48px;visibility:hidden;z-index:64;">
+<img src="images/red_bottom.png" id="268_hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu100m1" style="position:absolute;left:650px;top:270px;width:85px;height:48px;z-index:65;">
+<img src="images/class_pt.png" id="clsu100m1" alt="" width="91" height="51"></div>
+<div id="wb_su100m1_hover" style="position:absolute;left:650px;top:270px;width:85px;height:48px;visibility:hidden;z-index:66;">
+<img src="images/red_bottom.png" id="su100m1_hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu101" style="position:absolute;left:750px;top:270px;width:85px;height:48px;z-index:67;">
+<img src="images/class_pt.png" id="clsu101" alt="" width="91" height="51"></div>
+<div id="wb_su101_hover" style="position:absolute;left:750px;top:270px;width:85px;height:48px;visibility:hidden;z-index:68;">
+<img src="images/red_bottom.png" id="su101_hover" alt="" width="85" height="48"></div>
+<div id="wb_cl263" style="position:absolute;left:850px;top:270px;width:85px;height:48px;z-index:69;">
+<img src="images/class_pt.png" id="cl263" alt="" width="91" height="51"></div>
+<div id="wb_263_hover" style="position:absolute;left:850px;top:270px;width:85px;height:48px;visibility:hidden;z-index:70;">
+<img src="images/red_bottom.png" id="263_hover" alt="" width="85" height="48"></div>
+<div id="wb_cl268-4" style="position:absolute;left:950px;top:270px;width:85px;height:48px;z-index:71;">
+<img src="images/class_pt.png" id="cl268-4" alt="" width="91" height="51"></div>
+<div id="wb_268-4_hover" style="position:absolute;left:950px;top:270px;width:85px;height:48px;visibility:hidden;z-index:72;">
+<img src="images/red_bottom.png" id="268-4_hover" alt="" width="85" height="48"></div>
+<div id="wb_polosa_kms1" style="position:absolute;left:116px;top:377px;width:36px;height:22px;z-index:73;">
+<img src="images/future.png" id="polosa_kms1" alt="" class="polosa_vniz" width="36" height="93"></div>
+<div id="wb_polosa_arta" style="position:absolute;left:416px;top:197px;width:36px;height:145px;z-index:74;">
+<img src="images/future.png" id="polosa_arta" alt="" class="polosa_vniz" width="36" height="93"></div>
+<div id="wb_clms-1" style="position:absolute;left:50px;top:390px;width:85px;height:48px;z-index:75;">
+<img src="images/class_lt.png" id="clms-1" alt="" width="91" height="51"></div>
+<div id="wb_ms-1_hover" style="position:absolute;left:50px;top:390px;width:85px;height:48px;visibility:hidden;z-index:76;">
+<img src="images/red_bottom.png" id="ms-1_hover" alt="" width="85" height="48"></div>
+<div id="wb_clt-60" style="position:absolute;left:150px;top:330px;width:85px;height:48px;z-index:77;">
+<img src="images/class_lt.png" id="clt-60" alt="" width="91" height="51"></div>
+<div id="wb_t-60_hover" style="position:absolute;left:150px;top:330px;width:85px;height:48px;visibility:hidden;z-index:78;">
+<img src="images/red_bottom.png" id="t-60_hover" alt="" width="85" height="48"></div>
+<div id="wb_clt-70" style="position:absolute;left:250px;top:330px;width:85px;height:48px;z-index:79;">
+<img src="images/class_lt.png" id="clt-70" alt="" width="91" height="51"></div>
+<div id="wb_t-70_hover" style="position:absolute;left:250px;top:330px;width:85px;height:48px;visibility:hidden;z-index:80;">
+<img src="images/red_bottom.png" id="t-70_hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu76m" style="position:absolute;left:350px;top:330px;width:85px;height:48px;z-index:81;">
+<img src="images/class_pt.png" id="clsu76m" alt="" width="91" height="51"></div>
+<div id="wb_su-76m_hover" style="position:absolute;left:350px;top:330px;width:85px;height:48px;visibility:hidden;z-index:82;">
+<img src="images/red_bottom.png" id="su-76m_hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu-85" style="position:absolute;left:450px;top:330px;width:85px;height:48px;z-index:83;">
+<img src="images/class_pt.png" id="clsu-85" alt="" width="91" height="51"></div>
+<div id="wb_su-85_hover" style="position:absolute;left:450px;top:330px;width:85px;height:48px;visibility:hidden;z-index:84;">
+<img src="images/red_bottom.png" id="su-85_hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu-122" style="position:absolute;left:550px;top:210px;width:85px;height:48px;z-index:85;">
+<img src="images/class_arta.png" id="clsu-122" alt="" width="91" height="51"></div>
+<div id="wb_su-122_hover" style="position:absolute;left:550px;top:210px;width:85px;height:48px;visibility:hidden;z-index:86;">
+<img src="images/red_bottom.png" id="su-122_hover" alt="" width="85" height="48"></div>
+<div id="wb_clsu-d15" style="position:absolute;left:650px;top:210px;width:85px;height:48px;z-index:87;">
+<img src="images/class_arta.png" id="clsu-d15" alt="" width="91" height="51"></div>
+<div id="wb_su-d15_hover" style="position:absolute;left:650px;top:210px;width:85px;height:48px;visibility:hidden;z-index:88;">
+<img src="images/red_bottom.png" id="su-d15_hover" alt="" width="85" height="48"></div>
+<div id="wb_clisu-2sh" style="position:absolute;left:750px;top:210px;width:85px;height:48px;z-index:89;">
+<img src="images/class_arta.png" id="clisu-2sh" alt="" width="91" height="51"></div>
+<div id="wb_isu-2sh_hover" style="position:absolute;left:750px;top:210px;width:85px;height:48px;visibility:hidden;z-index:90;">
+<img src="images/red_bottom.png" id="isu-2sh_hover" alt="" width="85" height="48"></div>
+<div id="wb_cl715" style="position:absolute;left:850px;top:210px;width:85px;height:48px;z-index:91;">
+<img src="images/class_arta.png" id="cl715" alt="" width="91" height="51"></div>
+<div id="wb_715_hover" style="position:absolute;left:850px;top:210px;width:85px;height:48px;visibility:hidden;z-index:92;">
+<img src="images/red_bottom.png" id="715_hover" alt="" width="85" height="48"></div>
+<div id="wb_cl261_4" style="position:absolute;left:950px;top:210px;width:85px;height:48px;z-index:93;">
+<img src="images/class_arta.png" id="cl261_4" alt="" width="91" height="51"></div>
+<div id="wb_261_4_hover" style="position:absolute;left:950px;top:210px;width:85px;height:48px;visibility:hidden;z-index:94;">
+<img src="images/red_bottom.png" id="261_4_hover" alt="" width="85" height="48"></div>
+<div id="wb_cnina_flag" style="position:absolute;left:470px;top:10px;width:70px;height:50px;z-index:95;">
+<a href="#" onmouseover="SetClass('#cnina_flag','scale1');return false;" onmouseout="SetClass('#cnina_flag','scale2');return false;"><img src="images/chin_70_50.png" id="cnina_flag" alt="" title="Китай" width="76" height="54"></a></div>
+<div id="wb_che_flag" style="position:absolute;left:400px;top:10px;width:70px;height:50px;z-index:96;">
+<a href="#" onmouseover="SetClass('#che_flag','scale1');return false;" onmouseout="SetClass('#che_flag','scale2');return false;"><img src="images/czech_70_50.png" id="che_flag" alt="" title="Чехословакия" width="76" height="54"></a></div>
+<div id="wb_fra_flag" style="position:absolute;left:260px;top:10px;width:70px;height:50px;z-index:97;">
+<a href="#" onmouseover="SetClass('#fra_flag','scale1');return false;" onmouseout="SetClass('#fra_flag','scale2');return false;"><img src="images/france_70_50.png" id="fra_flag" alt="" title="Франция" width="76" height="54"></a></div>
+<div id="wb_ger_flag" style="position:absolute;left:120px;top:10px;width:70px;height:50px;z-index:98;">
+<a href="#" onmouseover="SetClass('#ger_flag','scale1');return false;" onmouseout="SetClass('#ger_flag','scale2');return false;"><img src="images/ger_70_50.png" id="ger_flag" alt="" title="Германия" width="76" height="54"></a></div>
+<div id="wb_ita_flag" style="position:absolute;left:750px;top:10px;width:70px;height:50px;z-index:99;">
+<a href="#" onmouseover="SetClass('#ita_flag','scale1');return false;" onmouseout="SetClass('#ita_flag','scale2');return false;"><img src="images/italy_70_50.png" id="ita_flag" alt="" title="Италия" width="76" height="54"></a></div>
+<div id="wb_jap_flag" style="position:absolute;left:540px;top:10px;width:70px;height:50px;z-index:100;">
+<a href="#" onmouseover="SetClass('#jap_flag','scale1');return false;" onmouseout="SetClass('#jap_flag','scale2');return false;"><img src="images/japan_70_50.png" id="jap_flag" alt="" title="Япония" width="76" height="54"></a></div>
+<div id="wb_pol_flag" style="position:absolute;left:610px;top:10px;width:70px;height:50px;z-index:101;">
+<a href="#" onmouseover="SetClass('#pol_flag','scale1');return false;" onmouseout="SetClass('#pol_flag','scale2');return false;"><img src="images/poland_70_50.png" id="pol_flag" alt="" title="Польша" width="76" height="54"></a></div>
+<div id="wb_swe_flag" style="position:absolute;left:680px;top:10px;width:70px;height:50px;z-index:102;">
+<a href="#" onmouseover="SetClass('#swe_flag','scale1');return false;" onmouseout="SetClass('#swe_flag','scale2');return false;"><img src="images/sweden_70_50.png" id="swe_flag" alt="" title="Швеция" width="76" height="54"></a></div>
+<div id="wb_uk_flag" style="position:absolute;left:330px;top:10px;width:70px;height:50px;z-index:103;">
+<a href="#" onmouseover="SetClass('#uk_flag','scale1');return false;" onmouseout="SetClass('#uk_flag','scale2');return false;"><img src="images/uk_70_50.png" id="uk_flag" alt="" title="Великобритания" width="76" height="54"></a></div>
+<div id="wb_usa_flag" style="position:absolute;left:190px;top:10px;width:70px;height:50px;z-index:104;">
+<a href="#" onmouseover="SetClass('#usa_flag','scale1');return false;" onmouseout="SetClass('#usa_flag','scale2');return false;"><img src="images/usa_70_50.png" id="usa_flag" alt="" title="США" width="76" height="54"></a></div>
+<div id="wb_ussr_flag" style="position:absolute;left:50px;top:10px;width:70px;height:50px;z-index:105;">
+<img src="images/ussr_70_50.png" id="ussr_flag" alt="" class="selected_naiton" title="СССР" width="76" height="54"></div>
+<div id="wb_union_flag" style="position:absolute;left:820px;top:10px;width:70px;height:50px;z-index:106;">
+<a href="#" onmouseover="SetClass('#union_flag','scale1');return false;" onmouseout="SetClass('#union_flag','scale2');return false;"><img src="images/intu_70_50.png" id="union_flag" alt="" title="Сборная наций" width="76" height="54"></a></div>
+<div id="wb_1_lvl" style="position:absolute;left:50px;top:100px;width:85px;height:30px;z-index:107;">
+<img src="images/1lvl.png" id="1_lvl" alt="" width="85" height="27"></div>
+<div id="wb_2_lvl" style="position:absolute;left:150px;top:100px;width:85px;height:30px;z-index:108;">
+<img src="images/2lvl.png" id="2_lvl" alt="" width="85" height="27"></div>
+<div id="wb_3_lvl" style="position:absolute;left:250px;top:100px;width:85px;height:30px;z-index:109;">
+<img src="images/3lvl.png" id="3_lvl" alt="" width="85" height="27"></div>
+<div id="wb_4_lvl" style="position:absolute;left:350px;top:100px;width:85px;height:30px;z-index:110;">
+<img src="images/4lvl.png" id="4_lvl" alt="" width="85" height="27"></div>
+<div id="wb_5_lvl" style="position:absolute;left:450px;top:100px;width:85px;height:30px;z-index:111;">
+<img src="images/5lvl.png" id="5_lvl" alt="" width="85" height="27"></div>
+<div id="wb_6_lvl" style="position:absolute;left:550px;top:100px;width:85px;height:30px;z-index:112;">
+<img src="images/6lvl.png" id="6_lvl" alt="" width="85" height="27"></div>
+<div id="wb_7_lvl" style="position:absolute;left:650px;top:100px;width:85px;height:30px;z-index:113;">
+<img src="images/7lvl.png" id="7_lvl" alt="" width="85" height="27"></div>
+<div id="wb_8_lvl" style="position:absolute;left:750px;top:100px;width:85px;height:30px;z-index:114;">
+<img src="images/8lvl.png" id="8_lvl" alt="" width="85" height="27"></div>
+<div id="wb_9_lvl" style="position:absolute;left:850px;top:100px;width:85px;height:30px;z-index:115;">
+<img src="images/9lvl.png" id="9_lvl" alt="" width="85" height="27"></div>
+<div id="wb_10_lvl" style="position:absolute;left:950px;top:100px;width:85px;height:30px;z-index:116;">
+<img src="images/10lvl.png" id="10_lvl" alt="" width="85" height="27"></div>
+<div id="wb_11_lvl" style="position:absolute;left:1050px;top:100px;width:85px;height:30px;z-index:117;">
+<img src="images/11lvl.png" id="11_lvl" alt="" width="85" height="27"></div>
+<div id="wb_t-9-2-ar-01" style="position:absolute;left:850px;top:210px;width:85px;height:48px;z-index:118;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_715_hover', 1);AnimateCss('wb_t-9-2-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_715_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl715', 'scale-my-classes', 0, 100);ShowObject('wb_isu-2sh_hover', 1);ShowObject('wb_su-d15_hover', 1);ShowObject('wb_su-122_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa11','polosa_red');SetClass('#polosa12','polosa_red');SetClass('#polosa13','polosa_red');SetClass('#polosa14','polosa_red');SetClass('#ugolok_shturmsau','ugolok_posle_strelki_red');SetClass('#polosa_shturmsau','polosa_vniz_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_715_hover', 0);AnimateCss('wb_t-9-2-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_715_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl715', 'scale-my2-classes', 0, 100);ShowObject('wb_isu-2sh_hover', 0);ShowObject('wb_su-d15_hover', 0);ShowObject('wb_su-122_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa11','polosa_black');SetClass('#polosa12','polosa_black');SetClass('#polosa13','polosa_black');SetClass('#polosa14','polosa_black');SetClass('#ugolok_shturmsau','ugolok_posle_strelki');SetClass('#polosa_shturmsau','polosa_vniz');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R167_Object_715_G.png" id="t-9-2-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-10-2-ar-01" style="position:absolute;left:950px;top:210px;width:85px;height:48px;z-index:119;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_261_4_hover', 1);AnimateCss('wb_t-10-2-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_261_4_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl261_4', 'scale-my-classes', 0, 100);ShowObject('wb_715_hover', 1);ShowObject('wb_isu-2sh_hover', 1);ShowObject('wb_su-d15_hover', 1);ShowObject('wb_su-122_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa10','polosa_red');SetClass('#polosa11','polosa_red');SetClass('#polosa12','polosa_red');SetClass('#polosa13','polosa_red');SetClass('#polosa14','polosa_red');SetClass('#ugolok_shturmsau','ugolok_posle_strelki_red');SetClass('#polosa_shturmsau','polosa_vniz_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_261_4_hover', 0);AnimateCss('wb_t-10-2-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_261_4_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl261_4', 'scale-my2-classes', 0, 100);ShowObject('wb_715_hover', 0);ShowObject('wb_isu-2sh_hover', 0);ShowObject('wb_su-d15_hover', 0);ShowObject('wb_su-122_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa10','polosa_black');SetClass('#polosa11','polosa_black');SetClass('#polosa12','polosa_black');SetClass('#polosa13','polosa_black');SetClass('#polosa14','polosa_black');SetClass('#ugolok_shturmsau','ugolok_posle_strelki');SetClass('#polosa_shturmsau','polosa_vniz');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R211_Object_261_4.png" id="t-10-2-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-10-1-ar-01" style="position:absolute;left:950px;top:150px;width:85px;height:48px;z-index:120;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_261hover', 1);AnimateCss('wb_t-10-1-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_261hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl261', 'scale-my-classes', 0, 100);ShowObject('wb_212_hover', 1);ShowObject('wb_su14-hover', 1);ShowObject('wb_s-51_hover', 1);ShowObject('wb_su-8_hover', 1);ShowObject('wb_su-122a_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa1','polosa_red');SetClass('#polosa2','polosa_red');SetClass('#polosa3','polosa_red');SetClass('#polosa4','polosa_red');SetClass('#polosa5','polosa_red');SetClass('#polosa6','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_arta','ugolok_posle_strelki_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_arta','polosa_vniz_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_261hover', 0);AnimateCss('wb_t-10-1-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_261hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl261', 'scale-my2-classes', 0, 100);ShowObject('wb_212_hover', 0);ShowObject('wb_su14-hover', 0);ShowObject('wb_s-51_hover', 0);ShowObject('wb_su-8_hover', 0);ShowObject('wb_su-122a_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa1','polosa_black');SetClass('#polosa2','polosa_black');SetClass('#polosa3','polosa_black');SetClass('#polosa4','polosa_black');SetClass('#polosa5','polosa_black');SetClass('#polosa6','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_arta','ugolok_posle_strelki');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_arta','polosa_vniz');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R52_Object_261.png" id="t-10-1-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-9-1-ar-01" style="position:absolute;left:850px;top:150px;width:85px;height:48px;z-index:121;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_212_hover', 1);AnimateCss('wb_t-9-1-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_212_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl212', 'scale-my-classes', 0, 100);ShowObject('wb_su14-hover', 1);ShowObject('wb_s-51_hover', 1);ShowObject('wb_su-8_hover', 1);ShowObject('wb_su-122a_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa2','polosa_red');SetClass('#polosa3','polosa_red');SetClass('#polosa4','polosa_red');SetClass('#polosa5','polosa_red');SetClass('#polosa6','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_arta','ugolok_posle_strelki_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_arta','polosa_vniz_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_212_hover', 0);AnimateCss('wb_t-9-1-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_212_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl212', 'scale-my2-classes', 0, 100);ShowObject('wb_su14-hover', 0);ShowObject('wb_s-51_hover', 0);ShowObject('wb_su-8_hover', 0);ShowObject('wb_su-122a_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa2','polosa_black');SetClass('#polosa3','polosa_black');SetClass('#polosa4','polosa_black');SetClass('#polosa5','polosa_black');SetClass('#polosa6','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_arta','ugolok_posle_strelki');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_arta','polosa_vniz');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R51_Object_212.png" id="t-9-1-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-8-1-ar-01" style="position:absolute;left:750px;top:150px;width:85px;height:48px;z-index:122;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su14-hover', 1);AnimateCss('wb_t-8-1-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su14-hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu14', 'scale-my-classes', 0, 100);ShowObject('wb_s-51_hover', 1);ShowObject('wb_su-8_hover', 1);ShowObject('wb_su-122a_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa3','polosa_red');SetClass('#polosa4','polosa_red');SetClass('#polosa5','polosa_red');SetClass('#polosa6','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_arta','ugolok_posle_strelki_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_arta','polosa_vniz_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su14-hover', 0);AnimateCss('wb_t-8-1-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su14-hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu14', 'scale-my2-classes', 0, 100);ShowObject('wb_s-51_hover', 0);ShowObject('wb_su-8_hover', 0);ShowObject('wb_su-122a_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa3','polosa_black');SetClass('#polosa4','polosa_black');SetClass('#polosa5','polosa_black');SetClass('#polosa6','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_arta','ugolok_posle_strelki');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_arta','polosa_vniz');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R27_SU-14.png" id="t-8-1-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-7-1-ar-01" style="position:absolute;left:650px;top:150px;width:85px;height:48px;z-index:123;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_s-51_hover', 1);AnimateCss('wb_t-7-1-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_s-51_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cls51', 'scale-my-classes', 0, 100);ShowObject('wb_su-8_hover', 1);ShowObject('wb_su-122a_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa4','polosa_red');SetClass('#polosa5','polosa_red');SetClass('#polosa6','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_arta','ugolok_posle_strelki_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_arta','polosa_vniz_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_s-51_hover', 0);AnimateCss('wb_t-7-1-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_s-51_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cls51', 'scale-my2-classes', 0, 100);ShowObject('wb_su-8_hover', 0);ShowObject('wb_su-122a_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa4','polosa_black');SetClass('#polosa5','polosa_black');SetClass('#polosa6','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_arta','ugolok_posle_strelki');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_arta','polosa_vniz');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R15_S-51.png" id="t-7-1-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-6-1-ar-01" style="position:absolute;left:550px;top:150px;width:85px;height:48px;z-index:124;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su-8_hover', 1);AnimateCss('wb_t-6-1-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su-8_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu8', 'scale-my-classes', 0, 100);ShowObject('wb_su-122a_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa5','polosa_red');SetClass('#polosa6','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_arta','ugolok_posle_strelki_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_arta','polosa_vniz_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su-8_hover', 0);AnimateCss('wb_t-6-1-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su-8_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu8', 'scale-my2-classes', 0, 100);ShowObject('wb_su-122a_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa5','polosa_black');SetClass('#polosa6','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_arta','ugolok_posle_strelki');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_arta','polosa_vniz');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R26_SU-8.png" id="t-6-1-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-5-1-ar-01" style="position:absolute;left:450px;top:150px;width:85px;height:48px;z-index:125;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su-122a_hover', 1);AnimateCss('wb_t-5-1-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su-122a_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu122a', 'scale-my-classes', 0, 100);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa6','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_arta','ugolok_posle_strelki_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_arta','polosa_vniz_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su-122a_hover', 0);AnimateCss('wb_t-5-1-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su-122a_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu122a', 'scale-my2-classes', 0, 100);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa6','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_arta','ugolok_posle_strelki');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_arta','polosa_vniz');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R100_SU122A.png" id="t-5-1-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-8-2-ar-01" style="position:absolute;left:750px;top:210px;width:85px;height:48px;z-index:126;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_isu-2sh_hover', 1);AnimateCss('wb_t-8-2-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_isu-2sh_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clisu-2sh', 'scale-my-classes', 0, 100);ShowObject('wb_su-d15_hover', 1);ShowObject('wb_su-122_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa12','polosa_red');SetClass('#polosa13','polosa_red');SetClass('#polosa14','polosa_red');SetClass('#ugolok_shturmsau','ugolok_posle_strelki_red');SetClass('#polosa_shturmsau','polosa_vniz_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_isu-2sh_hover', 0);AnimateCss('wb_t-8-2-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_isu-2sh_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clisu-2sh', 'scale-my2-classes', 0, 100);ShowObject('wb_su-d15_hover', 0);ShowObject('wb_su-122_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa12','polosa_black');SetClass('#polosa13','polosa_black');SetClass('#polosa14','polosa_black');SetClass('#ugolok_shturmsau','ugolok_posle_strelki');SetClass('#polosa_shturmsau','polosa_vniz');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R210_ISU_2SH.png" id="t-8-2-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-7-2-ar-01" style="position:absolute;left:650px;top:210px;width:85px;height:48px;z-index:127;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su-d15_hover', 1);AnimateCss('wb_t-7-2-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su-d15_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu-d15', 'scale-my-classes', 0, 100);ShowObject('wb_su-122_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa13','polosa_red');SetClass('#polosa14','polosa_red');SetClass('#ugolok_shturmsau','ugolok_posle_strelki_red');SetClass('#polosa_shturmsau','polosa_vniz_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su-d15_hover', 0);AnimateCss('wb_t-7-2-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su-d15_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu-d15', 'scale-my2-classes', 0, 100);ShowObject('wb_su-122_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa13','polosa_black');SetClass('#polosa14','polosa_black');SetClass('#ugolok_shturmsau','ugolok_posle_strelki');SetClass('#polosa_shturmsau','polosa_vniz');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R166_SU_D15.png" id="t-7-2-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-6-2-ar-01" style="position:absolute;left:550px;top:210px;width:85px;height:48px;z-index:128;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su-122_hover', 1);AnimateCss('wb_t-6-2-ar-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su-122_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu-122', 'scale-my-classes', 0, 100);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa14','polosa_red');SetClass('#ugolok_shturmsau','ugolok_posle_strelki_red');SetClass('#polosa_shturmsau','polosa_vniz_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su-122_hover', 0);AnimateCss('wb_t-6-2-ar-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su-122_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu-122', 'scale-my2-classes', 0, 100);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa14','polosa_black');SetClass('#ugolok_shturmsau','ugolok_posle_strelki');SetClass('#polosa_shturmsau','polosa_vniz');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R163_SU_122.png" id="t-6-2-ar-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-5-2_3_4-pt-01" style="position:absolute;left:450px;top:330px;width:85px;height:48px;z-index:129;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su-85_hover', 1);AnimateCss('wb_t-5-2_3_4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su-85_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu-85', 'scale-my-classes', 0, 100);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su-85_hover', 0);AnimateCss('wb_t-5-2_3_4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su-85_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu-85', 'scale-my2-classes', 0, 100);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R02_SU-85.png" id="t-5-2_3_4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-4-1_2_3_4-pt-01" style="position:absolute;left:350px;top:330px;width:85px;height:48px;z-index:130;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su-76m_hover', 1);AnimateCss('wb_t-4-1_2_3_4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su-76m_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu76m', 'scale-my-classes', 0, 100);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su-76m_hover', 0);AnimateCss('wb_t-4-1_2_3_4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su-76m_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu76m', 'scale-my2-classes', 0, 100);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R24_SU-76.png" id="t-4-1_2_3_4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-3-1_2_3_4-lt-01" style="position:absolute;left:250px;top:330px;width:85px;height:48px;z-index:131;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_t-70_hover', 1);AnimateCss('wb_t-3-1_2_3_4-lt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_t-70_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clt-70', 'scale-my-classes', 0, 100);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_t-70_hover', 0);AnimateCss('wb_t-3-1_2_3_4-lt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_t-70_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clt-70', 'scale-my2-classes', 0, 100);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R43_T-70.png" id="t-3-1_2_3_4-lt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-2-1_2_3_4-lt-01" style="position:absolute;left:150px;top:330px;width:85px;height:48px;z-index:132;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_t-60_hover', 1);AnimateCss('wb_t-2-1_2_3_4-lt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_t-60_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clt-60', 'scale-my-classes', 0, 100);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_t-60_hover', 0);AnimateCss('wb_t-2-1_2_3_4-lt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_t-60_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clt-60', 'scale-my2-classes', 0, 100);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R42_T-60.png" id="t-2-1_2_3_4-lt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-1-1_2_3_4_5_6_7_8-lt-01" style="position:absolute;left:50px;top:390px;width:85px;height:48px;z-index:133;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_ms-1_hover', 1);AnimateCss('wb_t-1-1_2_3_4_5_6_7_8-lt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_ms-1_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clms-1', 'scale-my-classes', 0, 100);ShowObject('wb_ms-1_hover', 1);return false;" onmouseout="ShowObject('wb_ms-1_hover', 0);AnimateCss('wb_t-1-1_2_3_4_5_6_7_8-lt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_ms-1_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clms-1', 'scale-my2-classes', 0, 100);ShowObject('wb_ms-1_hover', 0);return false;"><img src="images/ussr-R11_MS-1.png" id="t-1-1_2_3_4_5_6_7_8-lt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_Text2" style="position:absolute;left:228px;top:556px;width:695px;height:33px;text-align:center;z-index:134;">
+<span style="color:#000000;font-family:MOSCOW2024;font-size:29px;"><strong>Сайт в разработке</strong></span></div>
+<div id="wb_Image1" style="position:absolute;left:744px;top:522px;width:100px;height:100px;z-index:135;">
+<img src="images/v_rabote.png" id="Image1" alt="" width="100" height="100"></div>
+<div id="wb_t-10-3-pt-01" style="position:absolute;left:950px;top:270px;width:85px;height:48px;z-index:136;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_268-4_hover', 1);AnimateCss('wb_t-10-3-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_268-4_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl268-4', 'scale-my-classes', 0, 100);ShowObject('wb_263_hover', 1);ShowObject('wb_su101_hover', 1);ShowObject('wb_su100m1_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa16','polosa_red');SetClass('#polosa17','polosa_red');SetClass('#polosa18','polosa_red');SetClass('#polosa19','polosa_red');SetClass('#polosa20','polosa_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');SetClass('#ugolok_su100m1','ugolok_posle_strelki_red');SetClass('#polosa_su100m1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_268-4_hover', 0);AnimateCss('wb_t-10-3-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_268-4_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl268-4', 'scale-my2-classes', 0, 100);ShowObject('wb_263_hover', 0);ShowObject('wb_su101_hover', 0);ShowObject('wb_su100m1_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa16','polosa_black');SetClass('#polosa17','polosa_black');SetClass('#polosa18','polosa_black');SetClass('#polosa19','polosa_black');SetClass('#polosa20','polosa_black');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');SetClass('#ugolok_su100m1','ugolok_posle_strelki');SetClass('#polosa_su100m1','polosa_vniz');return false;"><img src="images/ussr-R149_Object_268_4.png" id="t-10-3-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-9-3-pt-01" style="position:absolute;left:850px;top:270px;width:85px;height:48px;z-index:137;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_263_hover', 1);AnimateCss('wb_t-9-3-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_263_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl263', 'scale-my-classes', 0, 100);ShowObject('wb_su101_hover', 1);ShowObject('wb_su100m1_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa17','polosa_red');SetClass('#polosa18','polosa_red');SetClass('#polosa19','polosa_red');SetClass('#polosa20','polosa_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');SetClass('#ugolok_su100m1','ugolok_posle_strelki_red');SetClass('#polosa_su100m1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_263_hover', 0);AnimateCss('wb_t-9-3-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_263_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl263', 'scale-my2-classes', 0, 100);ShowObject('wb_su101_hover', 0);ShowObject('wb_su100m1_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa17','polosa_black');SetClass('#polosa18','polosa_black');SetClass('#polosa19','polosa_black');SetClass('#polosa20','polosa_black');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');SetClass('#ugolok_su100m1','ugolok_posle_strelki');SetClass('#polosa_su100m1','polosa_vniz');return false;"><img src="images/ussr-R93_Object263.png" id="t-9-3-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-8-3-pt-01" style="position:absolute;left:750px;top:270px;width:85px;height:48px;z-index:138;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su101_hover', 1);AnimateCss('wb_t-8-3-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su101_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu101', 'scale-my-classes', 0, 100);ShowObject('wb_su100m1_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa18','polosa_red');SetClass('#polosa19','polosa_red');SetClass('#polosa20','polosa_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');SetClass('#ugolok_su100m1','ugolok_posle_strelki_red');SetClass('#polosa_su100m1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su101_hover', 0);AnimateCss('wb_t-8-3-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su101_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu101', 'scale-my2-classes', 0, 100);ShowObject('wb_su100m1_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa18','polosa_black');SetClass('#polosa19','polosa_black');SetClass('#polosa20','polosa_black');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');SetClass('#ugolok_su100m1','ugolok_posle_strelki');SetClass('#polosa_su100m1','polosa_vniz');return false;"><img src="images/ussr-R58_SU-101.png" id="t-8-3-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-7-3-pt-01" style="position:absolute;left:650px;top:270px;width:85px;height:48px;z-index:139;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su100m1_hover', 1);AnimateCss('wb_t-7-3-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su100m1_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu100m1', 'scale-my-classes', 0, 100);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa19','polosa_red');SetClass('#polosa20','polosa_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');SetClass('#ugolok_su100m1','ugolok_posle_strelki_red');SetClass('#polosa_su100m1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su100m1_hover', 0);AnimateCss('wb_t-7-3-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su100m1_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu100m1', 'scale-my2-classes', 0, 100);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa19','polosa_black');SetClass('#polosa20','polosa_black');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');SetClass('#ugolok_su100m1','ugolok_posle_strelki');SetClass('#polosa_su100m1','polosa_vniz');AnimateCss('wb_clsu100m1', 'scale-my2-classes', 0, 100);return false;"><img src="images/ussr-R74_SU100M1.png" id="t-7-3-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-10-4-pt-01" style="position:absolute;left:950px;top:330px;width:85px;height:48px;z-index:140;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_268_hover', 1);AnimateCss('wb_t-10-4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_268_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl268', 'scale-my-classes', 0, 100);ShowObject('wb_704_hover', 1);ShowObject('wb_isu152_hover', 1);ShowObject('wb_su152_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa21','polosa_red');SetClass('#polosa22','polosa_red');SetClass('#polosa23','polosa_red');SetClass('#polosa24','polosa_red');SetClass('#polosa20','polosa_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_268_hover', 0);AnimateCss('wb_t-10-4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_268_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl268', 'scale-my2-classes', 0, 100);ShowObject('wb_704_hover', 0);ShowObject('wb_isu152_hover', 0);ShowObject('wb_su152_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa21','polosa_black');SetClass('#polosa22','polosa_black');SetClass('#polosa23','polosa_black');SetClass('#polosa24','polosa_black');SetClass('#polosa20','polosa_black');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R88_Object268.png" id="t-10-4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-9-4-pt-01" style="position:absolute;left:850px;top:330px;width:85px;height:48px;z-index:141;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_704_hover', 1);AnimateCss('wb_t-9-4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_704_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_cl704', 'scale-my-classes', 0, 100);ShowObject('wb_isu152_hover', 1);ShowObject('wb_su152_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa22','polosa_red');SetClass('#polosa23','polosa_red');SetClass('#polosa24','polosa_red');SetClass('#polosa20','polosa_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_704_hover', 0);AnimateCss('wb_t-9-4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_704_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_cl704', 'scale-my2-classes', 0, 100);ShowObject('wb_isu152_hover', 0);ShowObject('wb_su152_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa22','polosa_black');SetClass('#polosa23','polosa_black');SetClass('#polosa24','polosa_black');SetClass('#polosa20','polosa_black');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R53_Object_704.png" id="t-9-4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-8-4-pt-01" style="position:absolute;left:750px;top:330px;width:85px;height:48px;z-index:142;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_isu152_hover', 1);AnimateCss('wb_t-8-4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_isu152_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clisy152', 'scale-my-classes', 0, 100);ShowObject('wb_su152_hover', 1);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa23','polosa_red');SetClass('#polosa24','polosa_red');SetClass('#polosa20','polosa_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_isu152_hover', 0);AnimateCss('wb_t-8-4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_isu152_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clisy152', 'scale-my2-classes', 0, 100);ShowObject('wb_su152_hover', 0);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa23','polosa_black');SetClass('#polosa24','polosa_black');SetClass('#polosa20','polosa_black');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R47_ISU-152.png" id="t-8-4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-7-4-pt-01" style="position:absolute;left:650px;top:330px;width:85px;height:48px;z-index:143;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su152_hover', 1);AnimateCss('wb_t-7-4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su152_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu152', 'scale-my-classes', 0, 100);ShowObject('wb_su100_hover', 1);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa24','polosa_red');SetClass('#polosa20','polosa_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su152_hover', 0);AnimateCss('wb_t-7-4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su152_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu152', 'scale-my2-classes', 0, 100);ShowObject('wb_su100_hover', 0);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa24','polosa_black');SetClass('#polosa20','polosa_black');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R18_SU-152.png" id="t-7-4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_t-6-3_4-pt-01" style="position:absolute;left:550px;top:330px;width:85px;height:48px;z-index:144;">
+<a href="#" onclick="onSelect(event)" onmouseover="ShowObject('wb_su100_hover', 1);AnimateCss('wb_t-6-3_4-pt-01', 'scale-my-classes', 0, 100);AnimateCss('wb_su100_hover', 'scale-my-classes', 0, 100);AnimateCss('wb_clsu100', 'scale-my-classes', 0, 100);ShowObject('wb_su-85_hover', 1);ShowObject('wb_su-76m_hover', 1);ShowObject('wb_t-70_hover', 1);ShowObject('wb_t-60_hover', 1);ShowObject('wb_ms-1_hover', 1);SetClass('#polosa20','polosa_red');SetClass('#polosa15','polosa_red');SetClass('#polosa7','polosa_red');SetClass('#polosa8','polosa_red');SetClass('#polosa9','polosa_red');SetClass('#ugolok_kms1','ugolok_posle_strelki_red');SetClass('#polosa_kms1','polosa_vniz_red');return false;" onmouseout="ShowObject('wb_su100_hover', 0);AnimateCss('wb_t-6-3_4-pt-01', 'scale-my2-classes', 0, 100);AnimateCss('wb_su100_hover', 'scale-my2-classes', 0, 100);AnimateCss('wb_clsu100', 'scale-my2-classes', 0, 100);ShowObject('wb_su-85_hover', 0);ShowObject('wb_su-76m_hover', 0);ShowObject('wb_t-70_hover', 0);ShowObject('wb_t-60_hover', 0);ShowObject('wb_ms-1_hover', 0);SetClass('#polosa20','polosa_black');SetClass('#polosa15','polosa_black');SetClass('#polosa7','polosa_black');SetClass('#polosa8','polosa_black');SetClass('#polosa9','polosa_black');SetClass('#ugolok_kms1','ugolok_posle_strelki');SetClass('#polosa_kms1','polosa_vniz');return false;"><img src="images/ussr-R17_SU-100.png" id="t-6-3_4-pt-01" alt="" class="tank" width="85" height="48"></a></div>
+<div id="wb_Text3" style="position:absolute;left:28px;top:63px;width:114px;height:54px;text-align:center;z-index:145;">
+<span style="color:#000000;font-family:MOSCOW2024;font-size:16px;">ТЕХНИКА<br>СССР<br></span></div>
+<div id="wb_faq" style="position:absolute;left:950px;top:10px;width:70px;height:50px;z-index:146;">
+<a href="#" onclick="window.location.href='./index.html';return false;" onmouseover="SetClass('#faq','scale1');return false;" onmouseout="SetClass('#faq','scale2');return false;"><img src="images/faq_70_50.png" id="faq" alt="" title="Как работает калькулятор" width="76" height="54"></a></div>
+<script>
+// Массив данных о танках
+const tankData = [
+    { 
+        id: "t-10-1-ar-01", 
+        name: "Об. 261", 
+        level: 10, 
+        branches: [1], 
+        minExp: 337000, 
+        maxExp: 323300 
+    },
+      { 
+        id: "t-9-1-ar-01", 
+        name: "212А", 
+        level: 9, 
+        branches: [1], 
+        minExp: 217500, 
+        maxExp: 242615 
+    },
+    { 
+        id: "t-8-1-ar-01", 
+        name: "СУ-14-2", 
+        level: 8, 
+        branches: [1], 
+        minExp: 135665, 
+        maxExp: 216965 
+    },
+    
+    
+    { 
+        id: "t-7-1-ar-01", 
+        name: "С-51", 
+        level: 7, 
+        branches: [1], 
+        minExp: 68800, 
+        maxExp: 73950 
+    },
+   { 
+        id: "t-6-1-ar-01", 
+        name: "СУ-8", 
+        level: 6, 
+        branches: [1], 
+        minExp: 36200, 
+        maxExp: 43850 
+    },
+   { 
+        id: "t-5-1-ar-01", 
+        name: "СУ-122А", 
+        level: 5, 
+        branches: [1], 
+        minExp: 16610, 
+        maxExp: 20090 
+    },
+   
+   { 
+        id: "t-10-2-ar-01", 
+        name: "Об. 261/4", 
+        level: 10, 
+        branches: [2], 
+        minExp: 337000, 
+        maxExp: 387300 
+    },
+      { 
+        id: "t-9-2-ar-01", 
+        name: "Об. 715Г", 
+        level: 9, 
+        branches: [2], 
+        minExp: 217500, 
+        maxExp: 242615 
+    },
+    { 
+        id: "t-8-2-ar-01", 
+        name: "ИСУ-2Ш", 
+        level: 8, 
+        branches: [2], 
+        minExp: 135665, 
+        maxExp: 216965 
+    },
+    
+    
+    { 
+        id: "t-7-2-ar-01", 
+        name: "СУ-Д15", 
+        level: 7, 
+        branches: [2], 
+        minExp: 68800, 
+        maxExp: 73950 
+    },
+   { 
+        id: "t-6-2-ar-01", 
+        name: "СУ-122", 
+        level: 6, 
+        branches: [2], 
+        minExp: 36200, 
+        maxExp: 43850 
+    },
+   { 
+        id: "t-5-2_3_4-pt-01", 
+        name: "СУ-85", 
+        level: 5, 
+        branches: [2, 3, 4], 
+        minExp: 16610, 
+        maxExp: 20090 
+    },
+{ 
+        id: "t-4-1_2_3_4-pt-01", 
+        name: "СУ-76М", 
+        level: 4, 
+        branches: [1, 2, 3, 4],
+        minExp: 4220, 
+        maxExp: 9680 
+    },
+   { 
+        id: "t-3-1_2_3_4-lt-01", 
+        name: "Т-70", 
+        level: 3, 
+        branches: [1, 2, 3, 4],
+        minExp: 1235, 
+        maxExp: 1620 
+    },
+   { 
+        id: "t-2-1_2_3_4-lt-01", 
+        name: "Т-60", 
+        level: 2, 
+        branches: [1, 2, 3, 4],
+        minExp: 310, 
+        maxExp: 310 
+    },
+{ 
+    id: "t-1-1_2_3_4_5_6_7_8-lt-01", 
+        name: "МС-1", 
+        level: 1, 
+        branches: [1, 2, 3, 4, 5, 6, 7, 8],
+        minExp: 0, 
+        maxExp: 0 
+    },
+      { 
+        id: "t-10-3-pt-01", 
+        name: "Об. 268/4", 
+        level: 10, 
+        branches: [3], 
+        minExp: 337000, 
+        maxExp: 323300 
+    },
+      { 
+        id: "t-9-3-pt-01", 
+        name: "Об. 263", 
+        level: 9, 
+        branches: [3], 
+        minExp: 217500, 
+        maxExp: 242615 
+    },
+    { 
+        id: "t-8-3-pt-01", 
+        name: "СУ-101", 
+        level: 8, 
+        branches: [3], 
+        minExp: 135665, 
+        maxExp: 216965 
+    },
+    
+    
+    { 
+        id: "t-7-3-pt-01", 
+        name: "СУ-100М1", 
+        level: 7, 
+        branches: [3], 
+        minExp: 68800, 
+        maxExp: 73950 
+    },
+      { 
+        id: "t-10-4-pt-01", 
+        name: "Об. 268", 
+        level: 10, 
+        branches: [4], 
+        minExp: 337000, 
+        maxExp: 323300 
+    },
+      { 
+        id: "t-9-4-pt-01", 
+        name: "Об. 704", 
+        level: 9, 
+        branches: [4], 
+        minExp: 217500, 
+        maxExp: 242615 
+    },
+    { 
+        id: "t-8-4-pt-01", 
+        name: "ИСУ-152", 
+        level: 8, 
+        branches: [4], 
+        minExp: 135665, 
+        maxExp: 216965 
+    },
+    
+    
+    { 
+        id: "t-7-4-pt-01", 
+        name: "СУ-152", 
+        level: 7, 
+        branches: [4], 
+        minExp: 68800, 
+        maxExp: 73950 
+    },
+      { 
+        id: "t-6-3_4-pt-01", 
+        name: "СУ-100", 
+        level: 6, 
+        branches: [3, 4], 
+        minExp: 36200, 
+        maxExp: 42950 
+    }
+];
+
+let selectedTanks = [];
+let activePopup = null;
+
+function onSelect(e) {
+    const el = e.srcElement;
+    if (!el) return;
+
+    el.classList.toggle('selected-tank');
+    checkSelectedTanks();
+    return false;
+}
+
+// Функция для добавления класса
+function setClass(selector, className) {
+    const element = document.querySelector(selector);
+    if (element && className && className.trim() !== "") {
+        element.className = className; // Устанавливаем только один класс
+    }
+}
+
+// Функция проверки выбранных танков
+function checkSelectedTanks() {
+    const tanks = document.querySelectorAll('.selected-tank');
+
+    if (tanks.length < 2) return;
+    if (tanks.length > 2) {
+        resetSelection();
+        alert("Можно выбрать только два танка!");
+        return;
+    }
+
+    const [tankA, tankB] = tanks;
+    const [lvlA, branchesA] = parseId(tankA.id);
+    const [lvlB, branchesB] = parseId(tankB.id);
+
+    // Определение старшего и младшего танка
+    const seniorTank = lvlA > lvlB ? tankA : tankB;
+    const juniorTank = lvlA <= lvlB ? tankA : tankB;
+
+    // Проверка веток
+    const hasCommonBranch = branchesA.some(b => branchesB.includes(b));
+    if (!hasCommonBranch) {
+        showError('errorDifferentBranch', seniorTank);
+        return;
+    }
+
+    // Получаем путь
+    const path = getPath(juniorTank.id, seniorTank.id);
+    if (!path || path.length === 0) {
+        console.error("Путь не найден");
+        return;
+    }
+
+    showPath(path, seniorTank);
+}
+
+// Функция разбора ID
+function parseId(id) {
+    const parts = id.split('-');
+    return [
+        parseInt(parts[1]) || 0,
+        parts[2].split('_').map(Number)
+    ];
+}
+
+// Функция получения пути
+function getPath(startTankId, endTankId) {
+    const startTank = tankData.find(tank => tank.id === startTankId);
+    const endTank = tankData.find(tank => tank.id === endTankId);
+
+    if (!startTank || !endTank) return null;
+
+    // Находим общие ветки
+    const commonBranches = startTank.branches.filter(branch => endTank.branches.includes(branch));
+    if (commonBranches.length === 0) return null;
+
+    // Находим все танки между начальным и конечным, но только из общих веток
+    const branchTanks = tankData.filter(tank =>
+        tank.branches.some(branch => commonBranches.includes(branch)) &&
+        tank.level > startTank.level &&
+        tank.level <= endTank.level
+    );
+
+    // Сортируем танки по уровню
+    return branchTanks.sort((a, b) => a.level - b.level);
+}
+
+// Функция отображения пути
+function showPath(path, targetElement) {
+    let totalMinExp = 0;
+    let totalMaxExp = 0;
+
+    // Минимальные затраты
+    let html = '<div>Минимальное количество<br> опыта для исследования:<br><hr>';
+    path.forEach(tank => {
+        html += `
+            <div class="path-row">
+                <span class="tank-name">${tank.name}</span>
+                <span class="exp-value">${tank.minExp.toLocaleString()}</span>
+            </div>
+        `;
+        totalMinExp += tank.minExp;
+    });
+
+    // Итоговые значения для минимальных затрат
+    html += `
+        <div class="total-exp">
+            <span class="total-label">Итого:</span>
+            <span class="total-value">${totalMinExp.toLocaleString()}</span>
+        </div>
+    </div>`;
+
+    html += '<div>Максимальное количество<br> опыта для исследования:<br><hr>';
+    path.forEach(tank => {
+        html += `
+            <div class="path-row">
+                <span class="tank-name">${tank.name}</span>
+                <span class="exp-value">${tank.maxExp.toLocaleString()}</span>
+            </div>
+        `;
+        totalMaxExp += tank.maxExp;
+    });
+
+    // Итоговые значения для максимальных затрат
+    html += `
+        <div class="total-exp">
+            <span class="total-label">Итого:</span>
+            <span class="total-value">${totalMaxExp.toLocaleString()}</span>
+        </div>
+    </div>`;
+
+    // Отображаем текст во всплывающем окне
+    document.querySelector('#pathDetails').innerHTML = html;
+    document.querySelector('#pathDetails').className = '';
+    showPopup('successPopup', targetElement);
+}
+
+function togglePan() {
+    const el = document.querySelector('#pathDetails');
+    if (el.className.includes('second')) {
+        closePopup();
+        return false;
+    }
+    document.querySelector('#pathDetails').classList.add('second');
+    return false;
+}
+
+function showPopup(popupId, targetElement) {
+    const shadow = document.getElementById('shadow');
+    shadow.style.display = 'block';
+
+    const popup = document.getElementById(popupId);
+    positionPopup(popup, targetElement);
+    popup.style.display = 'block';
+    activePopup = popup;
+
+    // Убираем автоматическое закрытие
+    // setTimeout(() => closePopup(errorType), 5000); // УБРАНО
+}
+
+// Функция отображения ошибок
+function showError(errorType, targetElement) {
+    showPopup(errorType, targetElement);
+}
+
+// Позиционирование окна под старшим танком
+function positionPopup(popup, target) {
+    const rect = target.getBoundingClientRect();
+    const top = rect.bottom + window.scrollY + 7; // 7px снизу
+    const left = rect.left + window.scrollX - 1; // Выравниваем левый край
+
+    popup.style.top = `${top}px`;
+    popup.style.left = `${left}px`;
+}
+
+// Сброс выбора
+function resetSelection() {
+    document.querySelectorAll('.selected-tank').forEach(tank =>
+        tank.classList.remove('selected-tank')
+    );
+    selectedTanks = [];
+    activePopup = null;
+}
+
+// Закрытие окна
+function closePopup(popupId) {
+    const popup = popupId ? document.getElementById(popupId) : activePopup;
+    const shadow = document.getElementById('shadow');
+
+    popup.style.display = 'none';
+    shadow.style.display = 'none';
+    resetSelection();
+}
+</script>
+
+</body>
+</html>
