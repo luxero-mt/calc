@@ -59,28 +59,6 @@
    0% { clip-path: polygon(0% 0%, 10% 0%, 10% 400%, 0% 400%, 0% 0%); background-color: #000000;  }
    100% { clip-path: polygon(0% 0%, 10% 0%, 10% 400%, 0% 400%, 0% 0%); background-color: #000000;  }
 }
-@keyframes siyaka_kraya
-{
-   0% { box-shadow: 0px 0px 3px #FF0000;  }
-   50% { box-shadow: 0px 0px 5px 5px #FF0000;  }
-   100% { box-shadow: 0px 0px 3px #FF0000;  }
-}
-@keyframes animate_tehnika_sssr
-{
-   0% { clip-path: polygon(0% 0%, 100% 0%,100% 100%, 0% 100%);  }
-   23% { clip-path: polygon(0% 0%, 100% 0%,100% 100%, 0% 100%);  }
-   25% { clip-path: polygon(0 0, 20% 0%, 20% 17%, 30% 17%, 30% 0%, 100% 0%, 100% 100%, 0% 100%);  }
-   27% { clip-path: polygon(0% 0%, 100% 0%,100% 100%, 0% 100%);  }
-   28% { clip-path: polygon(0 0, 20% 0%, 20% 17%, 30% 17%, 30% 0%, 100% 0%, 100% 100%, 0% 100%);  }
-   29% { clip-path: polygon(0% 0%, 100% 0%,100% 100%, 0% 100%);  }
-   54% { opacity: 1;  }
-   55% { opacity: 0;  }
-   56% { opacity: 1;  }
-   76% { clip-path: polygon(0% 0%, 100% 0%,100% 100%, 0% 100%);  }
-   77% { clip-path: polygon(0% 0%, 100% 0%,100% 20%, 75% 20%, 75% 40%, 100% 40%, 100% 100%, 0% 100%);  }
-   78% { clip-path: polygon(0% 0%, 100% 0%,100% 20%, 75% 20%, 75% 40%, 100% 40%, 100% 100%, 0% 100%);  }
-   79% { clip-path: polygon(0% 0%, 100% 0%,100% 100%, 0% 100%);  }
-}
 @keyframes nosik_strelki_infinite
 {
    0% { background-color: #000000; clip-path: polygon( -21% 12%, 0% 28%, -20% 44%, -21% 12%);;  }
@@ -100,6 +78,16 @@
 {
    0% { background-color: #FF7F50; clip-path: polygon(0% 0%, 10% 0%, 10% 400%, 0% 400%, 0% 0%);  }
    100% { background-color: #FF7F50; clip-path: polygon(0% 0%, 10% 0%, 10% 400%, 0% 400%, 0% 0%);  }
+}
+@keyframes kysok-polosi-vpravo
+{
+   0% { clip-path: polygon(0% 22%, 39% 22%, 39% 32%, 0% 32%); background-color: #000000;  }
+   100% { clip-path: polygon(0% 22%, 39% 22%, 39% 32%, 0% 32%); background-color: #000000;  }
+}
+@keyframes kysok-polosi-vpravo-red
+{
+   0% { background-color: #FF7F50; clip-path: polygon(0% 22%, 39% 22%, 39% 32%, 0% 32%);  }
+   100% { background-color: #FF7F50; clip-path: polygon(0% 22%, 39% 22%, 39% 32%, 0% 32%);  }
 }
 h1, .h1
 {
@@ -421,4 +409,35 @@ h6, .h6
 {
    text-decoration: none;
    background-color: transparent;
+}
+.selected-tank2
+{
+   text-decoration: none;
+   background-color: transparent;
+   background-image: url('images/selected_tank.png');
+   background-size: 100% 100%;
+}
+.kysok-polosi-vpravo
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: kysok-polosi-vpravo;
+   animation-duration: 500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
+}
+.kysok-polosi-vpravo-red
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: kysok-polosi-vpravo-red;
+   animation-duration: 500ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: none;
 }
