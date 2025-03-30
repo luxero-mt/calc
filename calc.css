@@ -49,6 +49,16 @@
    0% { background-color: #000000; clip-path: polygon( -21% 12%, 0% 28%, -20% 44%, -21% 12%);;  }
    100% { background-color: #000000; clip-path: polygon(100% 12%, 121% 28%, 100% 44%, 100% 12%);;  }
 }
+@keyframes strelka_vverh_01
+{
+   0% { clip-path: polygon(0% 120%, 0% 110%, 50% 100%, 100% 110%, 100% 120%, 50% 110%, 0% 120%);; background-color: #000000;  }
+   100% { clip-path: polygon(0% 0%, 0% -10%, 50% -20%, 100% -10%, 100% 0%, 50% -10%, 0% 0%);; background-color: #000000;  }
+}
+@keyframes strelka_vverh_02
+{
+   0% { clip-path: polygon(0% 95%, 0% 85%, 50% 75%, 100% 85%, 100% 95%, 50% 85%, 0% 95%);; background-color: #000000;  }
+   100% { clip-path: polygon(0% 20%, 0% 10%, 50% 0%, 100% 10%, 100% 20%, 50% 10%, 0% 20%);; background-color: #000000;  }
+}
 h1, .h1
 {
    font-family: Arial;
@@ -293,4 +303,28 @@ h6, .h6
    text-decoration: none;
    background-color: transparent;
    filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+}
+.strelka_vverh_01
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: strelka_vverh_01;
+   animation-duration: 1000ms;
+   animation-delay: 0ms;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+   animation-direction: normal;
+   animation-fill-mode: forwards;
+}
+.strelka_vverh_02
+{
+   text-decoration: none;
+   background-color: transparent;
+   animation-name: strelka_vverh_02;
+   animation-duration: 1000ms;
+   animation-delay: 0ms;
+   animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+   animation-fill-mode: none;
 }

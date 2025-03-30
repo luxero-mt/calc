@@ -1,0 +1,267 @@
+html, body, #container
+{
+   width: 100%;
+   height: 100%;
+}
+body
+{
+   background-color: #FFFFFF;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 16px;
+   line-height: 1.1875;
+   margin: 0;
+   padding: 0;
+   overflow-x: scroll;
+   overflow-y: scroll;
+}
+#wb_cnina_flag
+{
+   vertical-align: top;
+}
+#cnina_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_che_flag
+{
+   vertical-align: top;
+}
+#che_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_fra_flag
+{
+   vertical-align: top;
+}
+#fra_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_ger_flag
+{
+   vertical-align: top;
+}
+#ger_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_ita_flag
+{
+   vertical-align: top;
+}
+#ita_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(0,0,0,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_jap_flag
+{
+   vertical-align: top;
+}
+#jap_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_pol_flag
+{
+   vertical-align: top;
+}
+#pol_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_swe_flag
+{
+   vertical-align: top;
+}
+#swe_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_uk_flag
+{
+   vertical-align: top;
+}
+#uk_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_usa_flag
+{
+   vertical-align: top;
+}
+#usa_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_ussr_flag
+{
+   vertical-align: top;
+}
+#ussr_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_union_flag
+{
+   vertical-align: top;
+}
+#union_flag
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Text1 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_Text1 div
+{
+   text-align: center;
+}
+#wb_faq
+{
+   vertical-align: top;
+}
+#faq
+{
+   padding: 0;
+   filter: drop-shadow(1px 1px 2px rgba(79,79,79,1.00));
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_Text2 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text2 div
+{
+   text-align: left;
+}
+#wb_1-2click2
+{
+   vertical-align: top;
+}
+#1-2click2
+{
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#MediaPlayer1
+{
+   box-sizing: border-box;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   border: 0px solid #DEE2E6;
+   border-radius: 0px;
+}
+#wb_Text3 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   border-radius: 0px;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text3 div
+{
+   text-align: left;
+}

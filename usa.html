@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Техника США</title>
+<meta name="keywords" content="мир танков, калькулятор прокачки">
+<meta name="robots" content="index, follow">
+<meta name="revisit-after" content="1 day">
+<link href="calc.css" rel="stylesheet">
+<link href="usa.css" rel="stylesheet">
+<script src="jquery-3.7.1.min.js"></script>
+<script src="wwb19.min.js"></script>
+</head>
+<body>
+<div id="wb_cnina_flag" style="position:absolute;left:470px;top:10px;width:70px;height:50px;z-index:0;">
+<a href="#" onmouseover="SetClass('#cnina_flag','scale1');return false;" onmouseout="SetClass('#cnina_flag','scale2');return false;"><img src="images/chin_70_50.png" id="cnina_flag" alt="" title="Техника Китая" width="76" height="54"></a></div>
+<div id="wb_che_flag" style="position:absolute;left:400px;top:10px;width:70px;height:50px;z-index:1;">
+<a href="#" onmouseover="SetClass('#che_flag','scale1');return false;" onmouseout="SetClass('#che_flag','scale2');return false;"><img src="images/czech_70_50.png" id="che_flag" alt="" title="Техника Чехословакии" width="76" height="54"></a></div>
+<div id="wb_fra_flag" style="position:absolute;left:260px;top:10px;width:70px;height:50px;z-index:2;">
+<a href="#" onmouseover="SetClass('#fra_flag','scale1');return false;" onmouseout="SetClass('#fra_flag','scale2');return false;"><img src="images/france_70_50.png" id="fra_flag" alt="" title="Техника Франции" width="76" height="54"></a></div>
+<div id="wb_ger_flag" style="position:absolute;left:120px;top:10px;width:70px;height:50px;z-index:3;">
+<a href="#" onmouseover="SetClass('#ger_flag','scale1');return false;" onmouseout="SetClass('#ger_flag','scale2');return false;"><img src="images/ger_70_50.png" id="ger_flag" alt="" title="Техника Германии" width="76" height="54"></a></div>
+<div id="wb_ita_flag" style="position:absolute;left:750px;top:10px;width:70px;height:50px;z-index:4;">
+<a href="#" onmouseover="SetClass('#ita_flag','scale1');return false;" onmouseout="SetClass('#ita_flag','scale2');return false;"><img src="images/italy_70_50.png" id="ita_flag" alt="" title="Техника Италии" width="76" height="54"></a></div>
+<div id="wb_jap_flag" style="position:absolute;left:540px;top:10px;width:70px;height:50px;z-index:5;">
+<a href="#" onmouseover="SetClass('#jap_flag','scale1');return false;" onmouseout="SetClass('#jap_flag','scale2');return false;"><img src="images/japan_70_50.png" id="jap_flag" alt="" title="Техника Японии" width="76" height="54"></a></div>
+<div id="wb_pol_flag" style="position:absolute;left:610px;top:10px;width:70px;height:50px;z-index:6;">
+<a href="#" onmouseover="SetClass('#pol_flag','scale1');return false;" onmouseout="SetClass('#pol_flag','scale2');return false;"><img src="images/poland_70_50.png" id="pol_flag" alt="" title="Техника Польши" width="76" height="54"></a></div>
+<div id="wb_swe_flag" style="position:absolute;left:680px;top:10px;width:70px;height:50px;z-index:7;">
+<a href="#" onmouseover="SetClass('#swe_flag','scale1');return false;" onmouseout="SetClass('#swe_flag','scale2');return false;"><img src="images/sweden_70_50.png" id="swe_flag" alt="" title="Техника Швеции" width="76" height="54"></a></div>
+<div id="wb_uk_flag" style="position:absolute;left:330px;top:10px;width:70px;height:50px;z-index:8;">
+<a href="#" onmouseover="SetClass('#uk_flag','scale1');return false;" onmouseout="SetClass('#uk_flag','scale2');return false;"><img src="images/uk_70_50.png" id="uk_flag" alt="" title="Техника Великобритании" width="76" height="54"></a></div>
+<div id="wb_usa_flag" style="position:absolute;left:190px;top:10px;width:70px;height:50px;z-index:9;">
+<img src="images/usa_70_50.png" id="usa_flag" alt="" class="selected_naiton" title="Техника США" width="76" height="54"></div>
+<div id="wb_ussr_flag" style="position:absolute;left:50px;top:10px;width:70px;height:50px;z-index:10;">
+<a href="#" onmouseover="SetClass('#ussr_flag','scale1');return false;" onmouseout="SetClass('#ussr_flag','scale2');return false;"><img src="images/ussr_70_50.png" id="ussr_flag" alt="" title="Техника СССР" width="76" height="54"></a></div>
+<div id="wb_union_flag" style="position:absolute;left:820px;top:10px;width:70px;height:50px;z-index:11;">
+<a href="#" onmouseover="SetClass('#union_flag','scale1');return false;" onmouseout="SetClass('#union_flag','scale2');return false;"><img src="images/intu_70_50.png" id="union_flag" alt="" title="Техника Сборной наций" width="76" height="54"></a></div>
+<div id="wb_1_lvl" style="position:absolute;left:50px;top:100px;width:85px;height:30px;z-index:12;">
+<img src="images/1lvl.png" id="1_lvl" alt="" width="85" height="27"></div>
+<div id="wb_2_lvl" style="position:absolute;left:150px;top:100px;width:85px;height:30px;z-index:13;">
+<img src="images/2lvl.png" id="2_lvl" alt="" width="85" height="27"></div>
+<div id="wb_3_lvl" style="position:absolute;left:250px;top:100px;width:85px;height:30px;z-index:14;">
+<img src="images/3lvl.png" id="3_lvl" alt="" width="85" height="27"></div>
+<div id="wb_4_lvl" style="position:absolute;left:350px;top:100px;width:85px;height:30px;z-index:15;">
+<img src="images/4lvl.png" id="4_lvl" alt="" width="85" height="27"></div>
+<div id="wb_5_lvl" style="position:absolute;left:450px;top:100px;width:85px;height:30px;z-index:16;">
+<img src="images/5lvl.png" id="5_lvl" alt="" width="85" height="27"></div>
+<div id="wb_6_lvl" style="position:absolute;left:550px;top:100px;width:85px;height:30px;z-index:17;">
+<img src="images/6lvl.png" id="6_lvl" alt="" width="85" height="27"></div>
+<div id="wb_7_lvl" style="position:absolute;left:650px;top:100px;width:85px;height:30px;z-index:18;">
+<img src="images/7lvl.png" id="7_lvl" alt="" width="85" height="27"></div>
+<div id="wb_8_lvl" style="position:absolute;left:750px;top:100px;width:85px;height:30px;z-index:19;">
+<img src="images/8lvl.png" id="8_lvl" alt="" width="85" height="27"></div>
+<div id="wb_9_lvl" style="position:absolute;left:850px;top:100px;width:85px;height:30px;z-index:20;">
+<img src="images/9lvl.png" id="9_lvl" alt="" width="85" height="27"></div>
+<div id="wb_10_lvl" style="position:absolute;left:950px;top:100px;width:85px;height:30px;z-index:21;">
+<img src="images/10lvl.png" id="10_lvl" alt="" width="85" height="27"></div>
+<div id="wb_11_lvl" style="position:absolute;left:1050px;top:100px;width:85px;height:30px;z-index:22;">
+<img src="images/11lvl.png" id="11_lvl" alt="" width="85" height="27"></div>
+<div id="wb_Text2" style="position:absolute;left:68px;top:1068px;width:695px;height:33px;text-align:center;z-index:23;">
+<span style="color:#000000;font-family:MOSCOW2024;font-size:29px;"><strong>Сайт в разработке</strong></span></div>
+<div id="wb_Image1" style="position:absolute;left:575px;top:1034px;width:100px;height:100px;z-index:24;">
+<img src="images/v_rabote.png" id="Image1" alt="" width="100" height="100"></div>
+<div id="wb_faq" style="position:absolute;left:950px;top:10px;width:70px;height:50px;z-index:25;">
+<a href="#" onclick="window.location.href='./index.html';return false;" onmouseover="SetClass('#faq','scale1');return false;" onmouseout="SetClass('#faq','scale2');return false;"><img src="images/faq_70_50.png" id="faq" alt="" title="Как работает калькулятор" width="76" height="54"></a></div>
+<div id="wb_Text1" style="position:absolute;left:470px;top:69px;width:210px;height:21px;text-align:center;z-index:26;">
+<span style="color:#000000;font-family:MOSCOW2024;font-size:19px;"><strong>Техника США</strong></span></div>
+</body>
+</html>
