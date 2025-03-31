@@ -101,7 +101,7 @@ $(document).ready(function()
 
 /* Тень для фона */
 #shadow {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -1631,7 +1631,7 @@ function getPath(startTankId, endTankId) {
     // Находим все танки между начальным и конечным, но только из общих веток
     const branchTanks = tankData.filter(tank =>
         tank.branches.some(branch => commonBranches.includes(branch)) &&
-        tank.level > startTank.level &&
+        tank.level >= startTank.level &&
         tank.level <= endTank.level
     );
 
@@ -1647,10 +1647,11 @@ function getPath(startTankId, endTankId) {
       }
 
       // Функция отображения пути
-      function showPath(path, targetElement) {
+      function showPath(tanks, targetElement) {
+        const [first, ...path] = tanks;
         let totalMinExp = 0
         let totalMaxExp = 0
-        let branches = []
+        let branches = first.branches;
 
         // Минимальные затраты
         let html =
@@ -1667,7 +1668,7 @@ function getPath(startTankId, endTankId) {
           totalMinExp += minExp
           branches = tank.branches
         })
-        branches = []
+        branches = first.branches;
         // Итоговые значения для минимальных затрат
         html += `
         <div class="total-exp">
